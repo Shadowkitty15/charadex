@@ -48,6 +48,28 @@
 </head>
 <body>
 
+  <script>
+    /* ==================================================================== */
+    /* Options
+    ======================================================================= */
+    let yourOptions = {
+
+    // Sheet Information
+    sheetID: "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
+    sheetPage: "Public Masterlist",
+
+    // Amount of items shown on the page
+    itemAmount: 16,
+
+    // Ascending  (1 2 3) || asc
+    // Descending (3 2 1) || desc
+    itemOrder: "desc",
+
+    //imageFolder: "imgs",
+
+    };
+  </script>
+
   <!-- ----------------------------------------------------------------- -->
   <!-- Navbar                                                            -->
   <!-- ----------------------------------------------------------------- -->
@@ -96,7 +118,7 @@
 
         <!-- Search -->
         <div class="col-md-auto p-1">
-          <select class="form-control bg-faded border-0" filter="designtype" id="filter">
+          <select class="form-control bg-faded" filter="designtype" id="filter">
             <option>All</option>
             <option>Official Design</option>
             <option>Guest Design</option>
@@ -106,7 +128,7 @@
 
         <!-- Search -->
         <div class="col-md-auto p-1">
-          <select class="form-control bg-faded border-0" id="search-filter">
+          <select class="form-control bg-faded" id="search-filter">
             <option></option>
             <option>Worth</option>
             <option>Owner</option>
@@ -117,7 +139,7 @@
 
         <!-- Search -->
         <div class="col-3 p-1">
-          <input class="form-control border-0 bg-faded search" type="search" placeholder="Search" id="search">
+          <input class="form-control bg-faded search" type="search" placeholder="Search" id="search">
         </div>
 
         <!-- Top Pagination -->
@@ -147,7 +169,7 @@
     <li class="col-xl-3 col-lg-4 col-sm-6 p-2" id="charadex-entries">
                 
       <!-- Card -->
-      <a href="" class="card h-100 overflow-hidden text-decoration-none link">
+      <a href="" class="card h-100 overflow-hidden link">
                 
         <!-- ID -->
         <h5 class="card-header text-center id"></h5>
@@ -157,12 +179,13 @@
       </a>
     </li>
 
+
     <li class="col-12 p-2" id="charadex-card">
-      <div class="card p-3 px-4 mb-4 text-sans-serif font-weight-bold text-uppercase">
-        <div class="row no-gutters m-n1">
-          <div class="col-4 p-1"><a id="entryAfter" href=""><i class="fas fa-chevron-left mr-2"></i><span></span></a></div>
+      <div class="card p-4 mb-4">
+        <div class="row no-gutters m-n1 text-sans-serif font-weight-bold text-uppercase">
+          <div class="col-4 p-1"><a id="entryNext" href=""><i class="bi bi-chevron-left mr-2"></i><span></span></a></div>
           <div class="col-4 text-center p-1"><a id="masterlistLink" href="">Masterlist</a></div>
-          <div class="col-4 p-1 text-right"><a id="entryBefore" href=""><span></span><i class="fas fa-chevron-right ml-2"></i></a></div>
+          <div class="col-4 p-1 text-right"><a id="entryPrev" href=""><span></span><i class="bi bi-chevron-right ml-2"></i></a></div>
         </div>
       </div>
       <div class="card overflow-hidden">
@@ -234,8 +257,6 @@
       </div> 
     </li>
 
-
-
   </div>
 
 
@@ -243,8 +264,8 @@
   <!-- Footer                                                            -->
   <!-- ----------------------------------------------------------------- -->
   <div class="footer bg-dark p-md-5 p-4 text-center">
-    <p><a class="text-reset text-decoration-none" href="">[Species] © [Owner]</a></p>
-    <p> </p><a class="text-decoration-none" href="https://charadex.com">Powered by Charadex</a></p>
+    <p><a class="text-reset" href="">[Species] © [Owner]</a></p>
+    <p><a href="https://charadex.com">Powered by Charadex</a></p>
   </div>
 
 
@@ -263,6 +284,7 @@
 
   <!-- Charadex Script -->
   <script src="styles/charadex.js"></script>
+  <script>speciesMasterlist(yourOptions);</script>
 
 
 </body>
