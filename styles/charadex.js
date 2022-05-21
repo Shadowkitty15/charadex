@@ -4,7 +4,15 @@ const speciesMasterlist = (options) => {
   /* Importing Your Options
   ======================================================================= */
 
-  let userOptions = options;
+  let userOptions = options || {
+    sheetID: "",
+    sheetPage: "",
+    itemAmount: "",
+    itemOrder: "",
+    imageFolder: "",
+    searchParams: "",
+  };
+  
 
   /* ==================================================================== */
   /* URL
@@ -21,14 +29,13 @@ const speciesMasterlist = (options) => {
       (userOptions.sheetID.includes('/d/')) 
       ? userOptions.sheetID.split('/d/')[1].split('/edit')[0] 
       : userOptions.sheetID 
-      || "18SMfCx05l0E5CS9DHC2xb6cLY2eRcJ0PjWQRlYATdRE",
+      || "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
     sheetPage: userOptions.sheetPage || "Public Masterlist",
     itemAmount: userOptions.itemAmount || 12,
     itemOrder: userOptions.itemOrder || "desc",
     imageFolder: userOptions.imageFolder || false,
     searchParams: userOptions.searchParams || ['id', 'owner', 'artist', 'designer'],
   };
-
 
 
   /* ==================================================================== */
