@@ -17,6 +17,7 @@
   --ml-body-bg:                 #F9F4F0;
   --ml-body-text:               #000;
   --ml-body-image:              url();
+  --ml-faded-bg:                #eeeeee;
   --ml-borders:                 #D5D0CC;
   --ml-border-radius:           1rem;
 
@@ -88,6 +89,7 @@ a:hover {
   background-color: var(--ml-navbar-bg) !important;
   border: none;
   border-radius: 0 0 var(--ml-border-radius) var(--ml-border-radius);
+  margin-top: 0;
 }
 
 .dropdown:hover .dropdown-menu,
@@ -102,7 +104,7 @@ a:hover {
 .navbar .dropdown-item,
 .navbar .dropdown-item-text {
   color: var(--ml-navbar-text);
-  transition: background .2s ease-in-out;
+  transition: color .2s ease, background .2s ease;
 }
 
 .navbar .dropdown-item:hover, 
@@ -195,7 +197,33 @@ a:hover {
   font-family: var(--ml-header-font);
 }
 
+.bg-faded {
+  background-color: var(--ml-faded-bg);
+}
+
 .list-group-item {
   background-color: var(--ml-card-bg) !important;
   border-color: var(--ml-card-border) !important;
+}
+
+.container {
+  max-width: 900px !important;
+}
+
+.form-control:hover,
+.form-control:focus,
+.form-control:active {
+  background-color: var(--ml-faded-bg) !important;
+}
+
+button:focus,
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control {
+ padding: .5rem .75rem !important;
+ font-size: .8rem !important;
+ border-radius: var(--ml-border-radius);
 }

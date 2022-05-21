@@ -1,199 +1,220 @@
 
-/* Sheet Options
------------------------------------------------------------------ */
+/* Options
+======================================================================= */
+let userOptions = {
 
-// Sheet information
-let sheetID = "18SMfCx05l0E5CS9DHC2xb6cLY2eRcJ0PjWQRlYATdRE";
-let sheetPage = "Masterlist";
+  // Sheet Information
+  sheetID: "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
+  sheetPage: "Public Masterlist",
 
-// Number of items on the page at a time
-let numOfItems = 12;
+  // Amount of items shown on the page
+  itemAmount: 16,
 
-// Sort order for ascending/descending
-// asc/desc
-var order = "desc";
+  // Ascending  (1 2 3) || asc
+  // Descending (3 2 1) || desc
+  itemOrder: "desc",
+
+  //imageFolder: "imgs",
+
+};
+
+/* URL
+======================================================================= */
+let url = new URL(window.location.href);
+const urlParams = new URLSearchParams(window.location.search);
+
+/* Options
+======================================================================= */
+const charadexInfo = {
+  sheetID: 
+    (userOptions.sheetID.includes('/d/')) 
+    ? userOptions.sheetID.split('/d/')[1].split('/edit')[0] 
+    : userOptions.sheetID 
+    || "18SMfCx05l0E5CS9DHC2xb6cLY2eRcJ0PjWQRlYATdRE",
+  sheetPage: userOptions.sheetPage || "Public Masterlist",
+  itemAmount: userOptions.itemAmount || 12,
+  itemOrder: userOptions.itemOrder || "desc",
+  imageFolder: userOptions.imageFolder || false,
+  searchParams: userOptions.searchParams || ['id', 'owner', 'artist', 'designer'],
+};
 
 
-/* Only edit below if you know what you're doing!
------------------------------------------------------------------ */
+/* Clean Sheet Data
+======================================================================= */
+const scrubData = (sheetData) => {
 
-// Sheet URL
-let sheetUrl = "https://docs.google.com/spreadsheets/d/" + sheetID + "/gviz/tq?tqx=out:json&sheet=" + sheetPage;
+  const scrubbedData = [];
+  cleanJson = JSON.parse(sheetData.substring(47).slice(0, -2));
 
-// Dah Page URL
-let pageURL = window.location.href;
-
-// URL without any bits
-let vanillaURL = pageURL.split('?')[0];
-
-// Pulls ID from URL
-let designID = pageURL.split('=')[1];
-
-// All values from the google sheet will be
-// pushed here to be called later on
-let keys = [];
-let values = [];
-let bigArr = [];
-
-// Fetches the sheet and gets to work on it
-fetch(sheetUrl).then(res => res.text()).then(text => {
-
-  // Makes google sheet JSON a bit more readable
-  const json = JSON.parse(text.substr(47).slice(0, -2));
-
-  // Pulls out the titles from the COL row
-  let sheetKeys = {};
-  for (let i = 0; i < json.table.cols.length; i++){
-    sheetKeys = json.table.cols[i].label.replaceAll(' ', '').replaceAll('\n','').toLowerCase();    
-    keys.push(sheetKeys);
+  const col = [];
+  if (cleanJson.table.cols[0].label) {
+    cleanJson.table.cols.forEach((headers) => {
+      if (headers.label) {
+        col.push(headers.label.toLowerCase().replace(/\s/g, ""));
+      }
+    });
+  } else {
+    [cleanJson.table.rows[0]].forEach((key) => {
+      key.c.forEach((val) => {
+        if (val != null) { 
+          if (val.v != null) { 
+            col.push(val.v.toLowerCase().replace(/\s/g, "")); 
+          } 
+        }
+      });
+    });
+    delete cleanJson.table.rows[0];
   }
 
-  // Slams all the information into a readable Object Array
-  $.each(json.table.rows, function (index, value) {
+  cleanJson.table.rows.forEach((info) => {
+    const row = {};
+    const isBoolean = val => 'boolean' === typeof val;
+    col.forEach((ele, ind) => {
+      row[ele] = info.c[ind] != null ? info.c[ind].f != null && !isBoolean(info.c[ind].v) ? info.c[ind].f : info.c[ind].v != null ? info.c[ind].v : "" : "";
+    });
+    scrubbedData.push(row);
+  });
 
-    let obj = {};
+  return scrubbedData;
+
+}
+
+/* Creating Sheet
+======================================================================= */
+fetch(`https://docs.google.com/spreadsheets/d/${charadexInfo.sheetID}/gviz/tq?tqx=out:json&headers=1&sheet=${charadexInfo.sheetPage}`)
+  .then(i => i.text())
+  .then(JSON => {
+
+    // Clean up sheet data so we can use it
+    let sheetArray = scrubData(JSON);
+
+    // Modifying the array
+    let preParam = url.href.includes('species') ? '&id=' : '?id=';
+    let len = sheetArray.length;
+    while (len--) {
+
+      // Adding link
+      sheetArray[len].link = url.href + preParam + sheetArray[len].id;
+
+      // Adding images (if you choose to upload to your site instead)
+      if (charadexInfo.imageFolder) {
+        sheetArray[len].image = `${url.origin}/${charadexInfo.imageFolder}/myo.png`;
+        if (sheetArray[len].designer && sheetArray[len].artist) {
+          sheetArray[len].image = `${url.origin}/${charadexInfo.imageFolder}/${sheetArray[len].id}.png`;
+        } else if (sheetArray[len].species != '' && (sheetArray[len].designer == '' && sheetArray[len].artist == '')) {
+          sheetArray[len].image = `${url.origin}/${charadexInfo.imageFolder}/myo_${sheetArray[len].species.toLowerCase()}.png`;
+        }
+      }
+
+      // Add vanila ID so it'll sort nicer
+      sheetArray[len].orderID = sheetArray[len].id.replace(/\D+/gm,"");
+
+    }
     
-    for (let row in value) {
+    // Reverses list
+    sheetArray.sort((a, b) => {return a.orderID - b.orderID})
 
-      obj = value[row];
-      arr = {};
+    console.log(sheetArray);
 
-      for (let i = 0; i < obj.length; i++){
-        if(obj[i] === null) {
-          obj[i] = {v: ""}; 
-        }if(obj[i].v === null) {
-          obj[i].v = ""; 
-        }if(obj[i].f) {
-          delete obj[i].v; 
-          arr[keys[i]] = obj[i].f;
-        }else {          
-          arr[keys[i]] = obj[i].v;  
-        }       
+    // Create array that allows list.js to call info from sheet
+    let itemArray = Object.keys(sheetArray[0]);
+    let imageIndex = itemArray.indexOf('image');
+    let linkIndex = itemArray.indexOf('link');
+    itemArray[imageIndex] = {name: 'image', attr: 'src'};
+    itemArray[linkIndex] = {name: 'link', attr: 'href'};
 
-        values.push(obj);
-      } 
+    // Filters out species based on URL parameters
+    if (urlParams.has('species')) {sheetArray = sheetArray.filter((i) => i.species.toLowerCase() === urlParams.get('species').toLowerCase());}
+
+    if (urlParams.has('id')) {
+
+      let len2 = sheetArray.length;
+      while (len2--) {
+        if (sheetArray[len2].orderID == urlParams.get('id').replace(/\D+/gm,"")) {
+          console.log(sheetArray[len2]);
+          if (sheetArray[len2 - 1]) {
+            console.log(sheetArray[len2 - 1]);
+            $("#entryBefore").attr("href", url.href.split('?id')[0].split('&id')[0] + preParam + sheetArray[len2 - 1].id);
+            $("#entryBefore span").text(sheetArray[len2 - 1].id);
+          } else {
+            $("#entryBefore i").remove();
+          }
+
+          if (sheetArray[len2 + 1]) {
+            console.log(sheetArray[len2 + 1]);
+            $("#entryAfter").attr("href", url.href.split('?id')[0].split('&id')[0] + preParam + sheetArray[len2 + 1].id);
+            $("#entryAfter span").text(sheetArray[len2 + 1].id);
+          } else {
+            $("#entryAfter i").remove();
+          }
+        }
+      }
+
+      $("#masterlistLink").attr("href", url.href.split('?id')[0].split('&id')[0]);
       
-      bigArr.push(arr);
+      // List.js options
+      let itemOptions = {
+        valueNames: itemArray,
+        item: 'charadex-card',
+      };
 
-    }   
+      // Filtering out singular card
+      let designID = urlParams.get('id');
+      sheetArray = sheetArray.filter((i) => i.id.includes(designID))[0];
+
+      // Creates singular item
+      let charadexItem = new List("charadex-gallery", itemOptions, sheetArray);
+
+    } else { 
+
+      $('#charadex-shit').show();
+
+      let galleryOptions = {
+        item: 'charadex-entries',
+        valueNames: itemArray,
+        searchColumns: charadexInfo.searchParams,
+        page: charadexInfo.itemAmount,
+        pagination: [{
+          innerWindow: 1,
+          left: 1,
+          right: 1,
+          item: `<li class='page-item'><a class='page page-link' href='javascript:;'></a></li>`,
+          paginationClass: 'pagination-top',
+        }],
+      };
+
+      let charadex = new List('charadex-gallery', galleryOptions, sheetArray);
+
+      // Sort based on ID
+      charadex.sort("orderID", {order: charadexInfo.itemOrder,})
+
+      // Filter Function
+      $("#filter").on('change', () => {
+        let selection = $("#filter option:selected").text().toLowerCase();
+        let filterType = $("#filter").attr('filter');
+        if (selection && selection != '') {
+          charadex.filter(function (i) {return i.values()[filterType].toLowerCase() == selection;});
+        } else {
+          charadex.filter();
+        }
+      });
+
+      // Filter Function
+      $("#search-filter").on('change', () => {
+        let selection = [$("#search-filter option:selected").text().toLowerCase()];
+        if (selection && !selection.includes('all')) {
+          $('#search').on('keyup', () => {
+            let searchString = $('#search').val();
+            charadex.search(searchString,selection);
+          });
+        }
+      });
+
+      // Prev & Next Functions
+      $('.btn-next').on('click', () => {$('.pagination .active').next().children('a')[0].click();})
+      $('.btn-prev').on('click', () => {$('.pagination .active').prev().children('a')[0].click();})
+
+    }
+
 
   })
-
-  for (let i = 0; i < bigArr.length; i++) {
-
-    // Adds link into the object
-    bigArr[i].link = vanillaURL + "?id=" + bigArr[i]["id"];
-
-    // Adds TBA to items with no owners
-    if(bigArr[i].owner === "") {bigArr[i].owner = "TBA";}
-
-  }
-
-  console.log(bigArr);
-
-  // Checks if the page is trying to direct to a card
-  if (pageURL.includes('?id=')) {
-    
-    // Grabs the values you need for the card
-    // So you don't have to put them in manually
-    let itemArray = Object.keys(bigArr[0]);
-    // Replaces the 'image' in the array with something
-    // that'll actually make it an image
-    itemArray[1] = { name: 'image', attr: 'src' };
-
-    // List.js options for the item
-    let itemOptions = {
-      valueNames: itemArray,
-      item: 'charadex-card',
-    };
-
-    // Create List
-    let charadexItem = new List('charadex-entry', itemOptions, bigArr);
-
-    // Searches for the correct item to display
-    charadexItem.search(designID, ['id']);
-
-    // Hides the big gallery and the search
-    $('#charadex-gallery').hide();
-
-    
-  }else{
-
-    // Hides the single entry & shows the search
-    $('#charadex-entry').hide();
-    $('#search').show();
-
-    // List.js Options
-    let galleryOptions = {
-      valueNames: [
-        'id',
-        'owner',
-        'artist',
-        'designer',
-        { name: 'image', attr: 'src' },
-        { name: 'link', attr: 'href' }
-      ],
-      searchColumns: [
-        'id',
-        'owner',
-        'artist',
-        'designer'
-      ],
-      item: 'charadex-item',
-      page: numOfItems,
-      pagination: [{
-        innerWindow: 1,
-        left: 1,
-        right: 1,
-        paginationClass: 'pagination-top',
-      },{
-        innerWindow: 1,
-        left: 1,
-        right: 1,
-        paginationClass: 'pagination-bottom',
-      }],
-    };
-
-    // Create List
-    let charadex = new List('charadex-gallery', galleryOptions, bigArr);
-    charadex.sort('id',{order: order });
-
-    // Force search to work outside list
-    $('#search').on('keyup', function() {
-      let searchString = $(this).val();
-      charadex.search(searchString);
-    });
-
-    // Style pagination list items
-    const bsStyle = () =>{
-      $('.pagination > li').addClass('page-item');
-      $('.pagination > li > a').addClass('page-link');
-    }
-    
-    // Add prev & next
-    const navButtons = () =>{
-      $('.pagination').append('<li class="btn-next page-item"><a class="page-link"><i class="bi bi-chevron-right"></i></a></li>');
-      $('.pagination').prepend('<li class="btn-prev page-item"><a class="page-link"><i class="bi bi-chevron-left"></i></a></li>');
-      $('.btn-next').on('click', function(){$('.pagination .active').next().trigger('click');})
-      $('.btn-prev').on('click', function(){$('.pagination .active').prev().trigger('click');})
-    }
-    
-    // Calling Functions
-    bsStyle();
-    navButtons();
-
-    // Shortcut function
-    const forceStyle = () =>{
-      bsStyle();
-      if (!document.querySelector(".btn-next")){
-        navButtons();
-      }
-    }
-
-    // Force style on document changes
-    $('.pagination').on('click', function(){forceStyle();});
-    $(document.body).on('change keyup', '#search', function(event) {forceStyle();});
-
-  }
-
-});
