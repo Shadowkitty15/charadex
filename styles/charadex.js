@@ -12,7 +12,7 @@ const speciesMasterlist = (options) => {
     imageFolder: "",
     searchParams: "",
   };
-  
+
 
   /* ==================================================================== */
   /* URL
@@ -53,17 +53,6 @@ const speciesMasterlist = (options) => {
           col.push(headers.label.toLowerCase().replace(/\s/g, ""));
         }
       });
-    } else {
-      [cleanJson.table.rows[0]].forEach((key) => {
-        key.c.forEach((val) => {
-          if (val != null) { 
-            if (val.v != null) { 
-              col.push(val.v.toLowerCase().replace(/\s/g, "")); 
-            } 
-          }
-        });
-      });
-      delete cleanJson.table.rows[0];
     }
 
     cleanJson.table.rows.forEach((info) => {
@@ -233,32 +222,23 @@ const speciesMasterlist = (options) => {
           // Sort based on ID
           charadex.sort("orderID", {order: charadexInfo.itemOrder,})
 
-        })();
-        
-
-        /* ================================================================ */
-        /* Custom Filter
-        /* ================================================================ */
-        (() => {
-
+          /* ================================================================ */
+          /* Custom Filter
+          /* ================================================================ */
           $("#filter").on('change', () => {
             let selection = $("#filter option:selected").text().toLowerCase();
             let filterType = $("#filter").attr('filter');
-            if (selection && (selection != 'All' || selection != '')) {
+            if (selection && selection != 'all') {
               charadex.filter(function (i) {return i.values()[filterType].toLowerCase() == selection;});
             } else {
               charadex.filter();
             }
           });
+          
 
-        })();
-        
-
-        /* ================================================================ */
-        /* Search Filter
-        /* ================================================================ */
-        (() => {
-
+          /* ================================================================ */
+          /* Search Filter
+          /* ================================================================ */
           $("#search-filter").on('change', () => {
             let selection = [$("#search-filter option:selected").text().toLowerCase()];
             if (selection && !selection.includes('all')) {
@@ -268,20 +248,16 @@ const speciesMasterlist = (options) => {
               });
             }
           });
-
-        })();
-        
-
-        /* ================================================================ */
-        /* Prev/Next in Pagination
-        /* ================================================================ */
-        (() => {
           
+
+          /* ================================================================ */
+          /* Prev/Next in Pagination
+          /* ================================================================ */
           $('.btn-next').on('click', () => {$('.pagination .active').next().children('a')[0].click();})
           $('.btn-prev').on('click', () => {$('.pagination .active').prev().children('a')[0].click();})
 
         })();
-
+        
       }
 
     })
