@@ -476,7 +476,7 @@ a:active {
 /* ============================================================= */
 
 .text-primary {
-  background-color: var(--cd-primary-color) !important;
+  color: var(--cd-primary-color) !important;
 }
 
 .bg-faded {
@@ -504,6 +504,7 @@ body {
 }
 
 /* Adds min height so footer stays at the bottom */
+.main-container,
 .masterlist-container {
   -ms-flex: 1 1 auto!important;
   flex: 1 1 auto!important;
