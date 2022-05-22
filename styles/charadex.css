@@ -475,6 +475,10 @@ a:active {
 /* Misc
 /* ============================================================= */
 
+.text-primary {
+  background-color: var(--cd-primary-color) !important;
+}
+
 .bg-faded {
   background-color: var(--cd-faded-background-color) !important;
 }

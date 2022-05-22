@@ -56,8 +56,8 @@
     let yourOptions = {
 
     // Sheet Information
-    sheetID: "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
-    sheetPage: "Public Masterlist",
+    sheetID: "1NclmNdLUJkv92tsOwbrtJPK31TniXUIplhfLF6nHVpQ",
+    sheetPage: "Faejin",
 
     // Amount of items shown on the page. Default is 12.
     itemAmount: 12,
@@ -70,209 +70,202 @@
     // the path to your folder. Note that the 'Images' column must be
     // removed from the Google Sheet.
     // i.e. imgs/ml-images
-    imageFolder: "",
+    imageFolder: "imgs",
+
+    // Columns the search looks through by default
+    searchParams: ['id', 'owner', 'artist', 'designer'],
 
     };
   </script>
 
-  <!-- ----------------------------------------------------------------- -->
-  <!-- Navbar                                                            -->
-  <!-- ----------------------------------------------------------------- -->
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light py-md-5 py-4">
+  <!-- --------------------------------------------------------------------
+  <-- 
+  <-- Navbar 
+  <-- 
+  <-------------------------------------------------------------------- -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
     <div class="container">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="#"><i class="bi bi-box2-heart"></i> Charadex</a>
+
+      <!-- Toggle -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#charadexnav">
         <i class="bi bi-list"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="charadexnav">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
+
+          <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
               Dropdown
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Link</a>
+              <a class="dropdown-item" href="#">Link</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Link</a>
             </div>
           </li>
+
         </ul>
       </div>
+
     </div>
   </nav>
+  
+  <!-- --------------------------------------------------------------------
+  <-- 
+  <-- Masterlist
+  <-- 
+  <-------------------------------------------------------------------- -->
+  <div class="container masterlist-container py-md-5 py-4">
 
-  <!-- ----------------------------------------------------------------- -->
-  <!-- Masterlist                                                        -->
-  <!-- ----------------------------------------------------------------- -->
-
-  <div class="container py-md-5 py-4" style="min-height:calc(100vh - 56px)" id="charadex-gallery">
-
-    <div class="card p-4 mb-4" style="display:none;" id="charadex-shit">
-
-      <hr>
-
-      <div class="row no-gutters m-n2">
-
-        <!-- Search -->
-        <div class="col-md-auto p-1">
-          <select class="form-control bg-faded" filter="designtype" id="filter">
-            <option>All</option>
-            <option>Official Design</option>
-            <option>Guest Design</option>
-            <option>MYO Design</option>
-          </select>
-        </div>
-
-        <!-- Search -->
-        <div class="col-md-auto p-1">
-          <select class="form-control bg-faded" id="search-filter">
-            <option></option>
-            <option>Worth</option>
-            <option>Owner</option>
-            <option>Designer</option>
-            <option>Artist</option>
-          </select>
-        </div>
-
-        <!-- Search -->
-        <div class="col-3 p-1">
-          <input class="form-control bg-faded search" type="search" placeholder="Search" id="search">
-        </div>
-
-        <!-- Top Pagination -->
-        <div class="col-auto ml-auto my-auto p-1">
-          <div class="nav d-flex">
-            <div class="btn-prev page-item"><a class="page-link"><i class="bi bi-chevron-left"></i></a></div>
-            <ul class="pagination pagination-top justify-content-center m-0"></ul>
-            <div class="btn-next page-item"><a class="page-link"><i class="bi bi-chevron-right"></i></a></div>
-          </div>
-        </div>
-
-      </div>
     
-    </div>
-
-    <!-- Masterlist Container -->
-    <ul class="row no-gutters list list-unstyled m-n2"></ul>
 
   </div>
+
 
   
-  <!-- 
-  ---------------------------------------------------------------------- -->
-  <div style="display:none;"> <!-- Do not remove display: none -->
-                
-    <!-- Container -->
-    <li class="col-xl-3 col-lg-4 col-sm-6 p-2" id="charadex-entries">
-                
-      <!-- Card -->
-      <a href="" class="card h-100 overflow-hidden link">
-                
-        <!-- ID -->
-        <h5 class="card-header text-center id"></h5>
-        <div class="card-body d-flex flex-fill">
-          <img class="image img-fluid m-auto" style="max-height:200px;" src="" oncontextmenu="return false">
-        </div>
-      </a>
-    </li>
-
-
-    <li class="col-12 p-2" id="charadex-card">
-      <div class="card p-4 mb-4">
-        <div class="row no-gutters m-n1 text-sans-serif font-weight-bold text-uppercase">
-          <div class="col-4 p-1"><a id="entryNext" href=""><i class="bi bi-chevron-left mr-2"></i><span></span></a></div>
-          <div class="col-4 text-center p-1"><a id="masterlistLink" href="">Masterlist</a></div>
-          <div class="col-4 p-1 text-right"><a id="entryPrev" href=""><span></span><i class="bi bi-chevron-right ml-2"></i></a></div>
-        </div>
-      </div>
-      <div class="card overflow-hidden">
-
-        <!-- Header -->
-        <h2 class="card-header text-center id"></h2>
-
-        <!-- Image -->
-        <div class="mx-auto w-100 text-center" style="max-width:350px;" oncontextmenu="return false">
-          <img class="image img-fluid" src="">
-        </div>
-        <hr>
-
-        <!-- All Other Info -->
-        <div class="row no-gutters py-4 px-5">
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Owner</b> <span class="owner"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Artist</b> <span class="artist"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Designer</b> <span class="designer"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Worth</b> <span class="worth"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Status</b> <span class="status"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Cooldown</b> <span class="cooldown"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-md-6 d-flex justify-content-between p-2">
-            <b>Design Type</b> <span class="designtype"></span>
-          </div>
-            
-
-          <!-- Item -->
-          <div class="col-12 p-2">
-            <b>Notes</b>
-            <div class="ps-3"> <span class="notes"></span></div>
-          </div>
-
-
-          <!-- Add more above this line -->
-        </div> 
-      </div> 
-    </li>
-
-  </div>
-
-
-  <!-- ----------------------------------------------------------------- -->
-  <!-- Footer                                                            -->
-  <!-- ----------------------------------------------------------------- -->
+  <!-- --------------------------------------------------------------------
+  <-- 
+  <-- Footer
+  <-- Please do not remove the credit - other creators might need a
+  <-- similar tool!
+  <-- 
+  <-------------------------------------------------------------------- -->
   <div class="footer bg-dark p-md-5 p-4 text-center">
     <p><a class="text-reset" href="">[Species] © [Owner]</a></p>
     <p><a href="https://charadex.com">Powered by Charadex</a></p>
   </div>
 
+
+  <!-- --------------------------------------------------------------------
+  <-- 
+  <-- Repeat Items
+  <-- Do not remove 'display:none;'
+  <-- 
+  <-------------------------------------------------------------------- -->
+  <div style="display:none;">
+
+
+    <!-- Species Buttons
+    ------------------------------------------------------------------- -->
+    <li class="col-lg col-sm-6 p-2" id="charadex-species">
+      <a class="btn btn-primary d-block link species" href=""></a>
+    </li>
+                
+
+    <!-- Gallery Items
+    ------------------------------------------------------------------- -->
+    <li class="col-lg-3 col-sm-6 p-2" id="charadex-entries">
+      <a class="card h-100 link" href="">
+        <h5 class="card-header text-center id"></h5>
+        <div class="card-body d-flex flex-fill">
+          <img class="image img-fluid m-auto" src="" oncontextmenu="return false">
+        </div>
+      </a>
+    </li>
+
+
+    <!-- Singular Item
+    ------------------------------------------------------------------- -->
+    <li class="col-12 p-2" id="charadex-card">
+
+      <!-- Prev & Next Topbar -->
+      <div class="card p-4 mb-4">
+        <div class="row no-gutters m-n1 text-sans-serif font-weight-bold text-uppercase">
+          <div class="col-4 p-1"><a id="entryPrev" href=""><i class="bi bi-chevron-left mr-2"></i><span></span></a></div>
+          <div class="col-4 text-center p-1"><a id="masterlistLink" href="">Masterlist</a></div>
+          <div class="col-4 p-1 text-right"><a id="entryNext" href=""><span></span><i class="bi bi-chevron-right ml-2"></i></a></div>
+        </div>
+      </div>
+
+      <!-- Actual Card -->
+      <div class="card">
+
+        <!-- Header -->
+        <h2 class="card-header text-center p-4 id"></h2>
+
+
+        <!--Main Info -->
+        <div class="row no-gutters p-3">
+
+
+          <!-- Image -->
+          <div class="col-6 p-3">
+            <div class="mx-auto w-100 text-center" oncontextmenu="return false">
+              <img class="image img-fluid" src="">
+            </div>
+          </div>
+
+
+          <!-- Information List -->
+          <div class="col-6 p-3">
+            
+            <!-- Item -->
+            <div class="d-flex justify-content-between mb-2">
+              <b class="text-muted">Owner</b>
+              <span class="owner"></span>
+            </div>
+              
+            <!-- Item -->
+            <div class="d-flex justify-content-between mb-2">
+              <b class="text-muted">Artist</b>
+              <span class="artist"></span>
+            </div>
+              
+            <!-- Item -->
+            <div class="d-flex justify-content-between mb-2">
+              <b class="text-muted">Designer</b>
+              <span class="designer"></span>
+            </div>
+              
+            <hr>
+  
+            <!-- Item -->
+            <div class="d-flex justify-content-between mb-2">
+              <b class="text-muted">Worth</b>
+              <span>$<span class="worth"></span></span>
+            </div>
+              
+            <!-- Item -->
+            <div class="d-flex justify-content-between mb-2">
+              <b class="text-muted">Status</b>
+              <span class="status"></span>
+            </div>
+              
+            <hr>
+              
+            <!-- Item -->
+            <div class="d-flex justify-content-between mb-2">
+              <b class="text-muted">Design Type</b>
+              <span class="designtype"></span>
+            </div>
+              
+            <hr>
+              
+            <!-- Item -->
+            <div class="">
+              <b class="text-muted">Notes</b>
+              <div class="pl-3">
+                <span class="notes"></span>
+              </div>
+            </div>
+
+            <!-- Add more list items above this line-->
+          </div>
+        </div>
+      </div> 
+    </li>
+
+
+  </div>
 
   <!-- ----------------------------------------------------------------- -->
   <!-- JS                                                                -->
@@ -289,7 +282,7 @@
 
   <!-- Charadex Script -->
   <script src="styles/charadex.js"></script>
-  <script>speciesMasterlist();</script>
+  <script>speciesMasterlist(yourOptions);</script>
 
 
 </body>
