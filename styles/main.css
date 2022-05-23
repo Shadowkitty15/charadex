@@ -15,7 +15,7 @@ body {
   /* ============================================================= */
   /* Primary Color
   ================================================================ */
-  --cd-primary-color:                    #5c8bad;
+  --cd-primary-color:                    #8FB7D4;
   --cd-primary-text-color:               #fff;
 
   /* ============================================================= */
@@ -105,7 +105,7 @@ body {
   /* Link
   ================================================================ */
 
-  --cd-link-text-color:                  var(--cd-primary-color);
+  --cd-link-text-color:                  #4c8ebd;
   --cd-link-text-color-hover:            var(--cd-secondary-color);
 
 
@@ -210,13 +210,18 @@ body.dark {
   /* Text
   ================================================================ */
   --cd-body-text-color:                  #f0f0f0;
-  --cd-faded-text-color:                 #dfdfdf;
+  --cd-faded-text-color:                 #a8a8a8;
   --cd-navbar-text-color:                var(--cd-faded-text-color);
+  --cd-link-text-color:                  var(--cd-primary-color);
 
   /* ============================================================= */
   /* Borders
   ================================================================ */
   --cd-border-color:                     rgba(255,255,255,.12);
+}
+
+body.dark img {
+  filter: invert(1) saturate(0.5) brightness(1.25) contrast(.75);
 }
 
 
@@ -257,7 +262,6 @@ a:active {
   color: var(--cd-link-text-color-hover);
   text-decoration: none;
 }
-
 
 /* ============================================================= */
 /* Navbar
@@ -511,7 +515,13 @@ a:active {
   color: var(--cd-faded-text-color) !important;
 }
 
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: var(--cd-navbar-font-family) !important;
+}
+
 hr {
+  margin: 5rem 0 !important;
   border-top-color: var(--cd-hr-border-color) !important;
   border-top-width: var(--cd-hr-border-width) !important;
   border-top-style: var(--cd-hr-border-style) !important;
@@ -561,11 +571,11 @@ img {
 }
 
 code {
-  color: var(--cd-primary-color);
+  color: var(--cd-link-text-color);
   background: var(--cd-faded-background-color);
-  border-radius: .4rem;
-  font-size: 86%;
+  border-radius: .5rem;
+  font-size: 90%;
   margin: 0 .2rem;
-  padding: .2rem .5rem;
-  white-space: nowrap;
+  padding: .15rem .5rem;
+  letter-spacing: 0;
 }
