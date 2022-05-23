@@ -2,10 +2,9 @@
 /* Include
 ======================================================================= */
 $(function () {
-  var includes = [$('[data-include]').attr('data-include')];
-  console.log(includes);
-  $.each(includes, function (e) {
-    var file = 'includes/' + e.attr('data-include') + '.html';
+  var includes = $('[data-include]');
+  $.each(includes, function () {
+    var file = 'includes/' + $(this).data('include') + '.html';
     $(this).load(file);
   })
 });

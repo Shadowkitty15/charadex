@@ -11,7 +11,7 @@
   <!-- ----------------------------------------------------------------- -->
 
   <!-- Website's icon in the browser -->
-  <link rel="shortcut icon" type="image/png" href=""/>
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
   <!-- Title of your site -->
   <title>Charadex</title>
@@ -32,6 +32,7 @@
   <!-- Bootstrap Icons -->
   <!-- https://icons.getbootstrap.com/#icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/734cc6a413.js" crossorigin="anonymous"></script>
 
 
   <!-- ----------------------------------------------------------------- -->
@@ -39,7 +40,7 @@
   <!-- ----------------------------------------------------------------- -->
   
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="styles/charadex.css">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400|Comfortaa:500" rel="stylesheet">
@@ -51,19 +52,165 @@
   <!-- --------------------------------------------------------------------
   <-- Navbar 
   <-------------------------------------------------------------------- -->
-  <nav class="nav navbar navbar-expand-lg py-3" data-include="header"></nav>
+  <nav class="nav navbar navbar-expand-md sticky-top py-3" data-include="header"></nav>
   
   <!-- --------------------------------------------------------------------
   <-- Cotent
   <-------------------------------------------------------------------- -->
-  <div class="container main-container py-md-5 py-4 bg-faded">
+  <div class="container-fluid main-container px-0">
 
-    <a id="gettingstarted"></a>
-    <hr>
-    <h2 class="text-primary">Getting Started</h2>
-    <div class="pl-5">
-      <p>First and foremost, you'll need the googlesheet! <a target="_blank" href="https://docs.google.com/spreadsheets/d/1mmCUiVuKwcEbYaRLqpKytsCnzUlcxbQlDzmPjFs-5VA/copy">Please grab a copy here.</a></p>
-      <p><b>Note:</b> This does not show you how to use the sheet - please go to <a href="#databasesetup">here</a> for more instructions.</p>
+    <div class="row no-gutters">
+      <div class="col-2 bg-faded">
+
+      </div>
+      <div class="col-8 p-3">
+        <div class="container py-md-5 py-4">
+          
+
+          <a id="about"></a>
+          <h2 class="text-primary mb-4">About</h2>
+          <div class="pl-4">
+            <p>After Eclipse took out DeviantArt, I made Charadex to help other species creators organize and keep easier track of their masterlist.</p>
+            <p>I've been improving slowly and I really hope it helps anyone!</p>
+            <p><b>And it's not limited to species!</b> If you just sell adopts or what to make a little organizer for your characters - this might help. I use it to keep track of role play AU's and my own designs too!</p>
+          </div>
+          
+
+          <a id="gettingstarted"></a>
+          <hr class="my-5">
+          <h2 class="text-primary mb-4">Getting Started</h2>
+          <div class="pl-4">
+            <p>I will only be showing how to host on Neocities. You can host anywhere that takes .html, .css, and .js files but I feel like this is the easiest for everyone.</p>
+            <ul class="fa-ul my-4">
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Copy <a target="_blank" href="https://docs.google.com/spreadsheets/d/1mmCUiVuKwcEbYaRLqpKytsCnzUlcxbQlDzmPjFs-5VA/copy">this Google Sheet</a> to your Google Drive.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> <b>Share</b> the entire sheet via link. <b>Make sure it is <u>View Only</u> - do not allow others to edit.</b></li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Download the most current version of Charadex and extract the .zip folder.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Sign Up or Sign In to <a href="https://neocities.org/">Neocities</a>.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Go to <b>Edit Site</b> and delete all files except the index.html file.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Open the unzipped Charadex file and upload the <b>index.html</b> file and the style folder to your Neocities. <b>Make sure that charadex.css and charadex.js are in the style folder.</b></li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Go to the index.html file and look for the <b>yourOptions</b> options near the top. Replace the <b>sheetID</b> string with a link to your google sheet.</li>
+              <li class="mb-2"><i class="fa-solid fa-exclamation text-warning fa-li"></i> <b>Optional:</b> If you're using an old sheet instead of the new one, fill <b>sheetPage</b> in with the word 'masterlist'. If you changed the masterlist's page name on your sheet, fill <b>sheetPage</b> in with that page name.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Your site should be up and running from here.</li>
+            </ul>
+          </div>
+          
+
+          <a id="gettingstarted"></a>
+          <hr class="my-5">
+          <h2 class="text-primary mb-4">Sheet Set-Up & Use</h2>
+          <div class="pl-4">
+            <p>I'll be going over the very basics to help you get up and running - if you have more questions about how sheets work in general, google is your friend.</p>
+          </div>
+          <hr class="my-5">
+          <h4 class="mb-3 text-muted">Options</h4>
+          <div class="pl-4 mb-5">
+            <p>This allows you to change a few things, such as the filler MYO image and the ID prefix, to better fit your
+              species and taste. Notes are added to the sheet for clarity, but you can remove all the text from them to
+              delete them if they're getting in the way.</p>
+          </div>
+          <h4 class="mb-3 text-muted">Log</h4>
+          <div class="pl-4 mb-5">
+            <p>The log you'll be inputting info into.</p>
+            <ul>
+              <li><code>Transaction ID</code> - This automatically adds a transaction number to your new entry.</li>
+              <li><code>ID</code> - If you're logging a new design, you leave this empty. But if you're logging a
+                transaction, make sure to fill in the ID so it updates the ML Entry!</li>
+              <li><code>ID Update</code> - Image of the design, leave empty if no design.</li>
+              <li><code>Image</code> - Image of the design, leave empty if no design.</li>
+              <li><code>Owner</code> - Owner of design at time of logging.</li>
+              <li><code>Artist</code> - Artist of image.</li>
+              <li><code>Designer</code> - Designer of design.</li>
+              <li><code>Worth</code> - Design's worth.</li>
+              <li><code>Status</code> - Whether it's okay to resale, trade, or gift a design - or if the design is voided.
+              </li>
+              <li><code>Cooldown</code> - Designs can be traded after this date. Small warnings will pop up in these
+                cells, don't worry about them, the sheet is working as intended.</li>
+              <li><code>Design Type</code> - Type of design.</li>
+              <li><code>Transaction Type</code> - If it's a new entry or a traded design, etc.</li>
+              <li><code>Notes</code> - Any extra notes about the design. These will be overwritten if you update them so
+                stay frosty!</li>
+              <li><code>Proof</code> - Proof of transaction.</li>
+            </ul>
+          </div>
+          <div class="card bg-faded p-4 mb-5">
+            <h4 class="text-primary mb-3"><i class="fal fa-exclamation-circle fa-fw"></i> Some Warnings</h4>
+            <div class="text-muted pl-3">
+              <ul class="fa-ul mb-0">
+                <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Original log entries should not be deleted - it will shift the ID numbers.</li>
+                <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> I do not recommend logging URLs anywhere other than the <code>Image</code> column.</li>
+                <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> <b>Do not move the ID column!</b> This will break your sheet.</li>
+                <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> <b>The <code>Image</code> column has a special formula</b> - only delete this column if your dead set on hosting images on your site.</li>
+                <li><i class="fa-solid fa-chevron-right fa-li"></i> Adding more images will require knowledge of JS and List.js to show them on site.</b></li>
+              </ul>
+            </div>
+          </div>
+          <h4 class="mb-3 text-muted">Public Masterlist</h4>
+          <div class="pl-4 mb-5">
+            <p>This is the final conglomerate of the logs, and the sheet you'll be pulling information from.</p>
+            <p>You'll only need to edit this sheet if you're adding traits.</p>
+          </div>
+          <hr>
+          <h3 class="text-primary mb-5">Adding an Entry</h3>
+          <img class="img-fluid"
+            src="images/newentry.gif">
+          <div class="my-5">
+            <p><b>Step One:</b> Right click on row 2 and then click Insert 1 Above.</p>
+            <p><b>Step Two:</b> Add information. If it's a new entry, leave <code>Updated ID</code> blank. If you're
+              updating, make sure to write out the ID.</p>
+            <p><b>Step Three:</b> You're done! But make sure to check the bank once you're done in case something doesn't
+              look right.</p>
+          </div>
+          <hr>
+          <h3 class="text-primary mb-5">Changing Usernames</h3>
+          <img class="img-fluid" src="images/replacename.gif">
+          <div class="my-5">
+            <p><b>Step One:</b> In the log, press <code>CTRL + F</code> and then type in the old username.</p>
+            <p><b>Step Two:</b> Press the button with 3 dots and enter the Replace with portion with the new username.</p>
+            <p><b>Step Three:</b> Press Replace all and you're done!</p>
+          </div>
+          <hr>
+          <h3 class="text-primary mb-5">Adding Traits (to the Sheet Only)</h3>
+          <img class="img-fluid" src="images/newtrait1.gif">
+          <div class="my-5">
+            <p><b>Step One:</b> Make the trait row in the Log table, I recommend putting it after <u>Designer</u>.</p>
+          </div>
+          <img class="img-fluid" src="images/newtrait2.gif">
+          <div class="my-5">
+            <p><b>Step Two:</b> Make the same rows in the Masterlist table.</p>
+            <p><b>Step Three:</b> Click any of the headers that are <b>not</b> ID or Image. Press <code>ctrl + c</code> to
+              copy, THIS IS IMPORTANT. Do <b>not</b> just copy the formula from the formula bar.</p>
+            <p><b>Step Four:</b> Click on any of the new trait row headers and press <code>ctrl + v</code>. This will
+                paste the formula and automatically change the referenced cells so you don't have to change anything in the
+                formula.</p>
+          </div>
+          <div class="card bg-faded p-5 mb-5 border-primary">
+            <h4 class="text-primary"><i class="fal fa-exclamation-circle fa-fw"></i> Note</h4>
+            <blockquote class="text-muted">
+              <p>If you want to show these on the site, you'll need to edit the HTML in there as well. Please head <a
+                  href="site_setup.html">here</a> for more info.</p>
+            </blockquote>
+          </div>
+          
+
+          <a id="gettingstarted"></a>
+          <hr class="my-5">
+          <h2 class="text-primary mb-4">Site Set-Up & Use</h2>
+          <div class="pl-4">
+            <p>I will only be showing how to host on Neocities. You can host anywhere that takes .html, .css, and .js files but I feel like this is the easiest for everyone.</p>
+            <ul class="fa-ul my-4">
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Copy <a target="_blank" href="https://docs.google.com/spreadsheets/d/1mmCUiVuKwcEbYaRLqpKytsCnzUlcxbQlDzmPjFs-5VA/copy">this Google Sheet</a> to your Google Drive.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> <b>Share</b> the entire sheet via link. <b>Make sure it is <u>View Only</u> - do not allow others to edit.</b></li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Download the most current version of Charadex and extract the .zip folder.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Sign Up or Sign In to <a href="https://neocities.org/">Neocities</a>.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Go to <b>Edit Site</b> and delete all files except the index.html file.</li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Open the unzipped Charadex file and upload the <b>index.html</b> file and the style folder to your Neocities. <b>Make sure that charadex.css and charadex.js are in the style folder.</b></li>
+              <li class="mb-2"><i class="fa-solid fa-chevron-right fa-li"></i> Your site should be up and running from here.</li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
     </div>
 
   </div>
@@ -85,7 +232,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
   <!-- Charadex Script -->
-  <script src="styles/charadex.js"></script>
+  <script src="styles/main.js"></script>
 
 
 </body>
