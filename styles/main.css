@@ -27,9 +27,9 @@ body {
   /* ============================================================= */
   /* Backgrounds
   ================================================================ */
-  --cd-body-background-color:            #e9e9e9;
+  --cd-body-background-color:            #ffffff;
   --cd-content-background-color:         #ffffff;
-  --cd-faded-background-color:           #e3e3e3;
+  --cd-faded-background-color:           #f8f8f8;
 
   /* Background Extras */
   --cd-body-background-image:             url();
@@ -522,13 +522,18 @@ hr {
 /* ============================================================= */
 
 html {
-  font-size: 125%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;    
+  font-size: 115%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  letter-spacing: .025rem;
+  line-height: 1.6;
 }
 
 /* Adds min height so footer stays at the bottom */
@@ -547,7 +552,7 @@ button:focus,
 
 /* Small container for more compact view */
 .container {
-  max-width: 950px !important;
+  max-width: 900px !important;
 }
 
 /* Make images not look ugly when resized */
