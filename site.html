@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <!-- ----------------------------------------------------------------- -->
+  <!-- About Your Site                                                   -->
+  <!-- ----------------------------------------------------------------- -->
+
+  <!-- Website's icon in the browser -->
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+  <!-- Title of your site -->
+  <title>Charadex</title>
+
+  <!-- Description of your site -->
+  <meta name="description" content="An automated masterlist for your species!">
+
+
+  <!-- ----------------------------------------------------------------- -->
+  <!-- Styles                                                            -->
+  <!-- ----------------------------------------------------------------- -->
+  
+  <!-- Bootstrap CSS -->
+  <!-- Using Bootstrap 4.5 because its closest to Toyhou.se's current version -->
+  <!-- https://getbootstrap.com/docs/4.5/getting-started/introduction/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <!-- https://icons.getbootstrap.com/#icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/734cc6a413.js" crossorigin="anonymous"></script>
+
+
+  <!-- ----------------------------------------------------------------- -->
+  <!-- Optional Styles                                                   -->
+  <!-- ----------------------------------------------------------------- -->
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400|Comfortaa:500" rel="stylesheet">
+
+
+</head>
+<body>
+
+  <!-- --------------------------------------------------------------------
+  <-- Navbar 
+  <-------------------------------------------------------------------- -->
+  <nav class="nav navbar navbar-expand-md sticky-top" data-include="header"></nav>
+  
+  <!-- --------------------------------------------------------------------
+  <-- Cotent
+  <-------------------------------------------------------------------- -->
+  <div class="container-fluid main-container px-0">
+
+    <div class="row no-gutters">
+      <div class="col-2 border-right" data-include="sidebar"></div>
+      <div class="col-8">
+        <div class="container py-md-5 py-4">
+
+          <a id="gettingstarted"></a>
+          <div class="text-center">
+            <h2 class="text-primary mb-4">Sheet Set-Up & Use</h2>
+            <div class="pl-4">
+              <p>I'll be going over the very basics to help you get up and running - if you have more questions about how sheets work in general, google is your friend.</p>
+            </div>
+          </div>
+          <hr class="my-5">
+          <h3 class="text-primary mb-4"><small>Section I</small><br>Sheet Pages</h3>
+          <hr class="my-5">
+          <h4 class="mb-3 text-muted">Options</h4>
+          <div class="pl-4 mb-5">
+            <p>This allows you to change a few things, such as the filler MYO image and the ID prefix, to better fit your
+              species and taste. Notes are added to the sheet for clarity, but you can remove all the text from them to
+              delete them if they're getting in the way.</p>
+            <ul class="fa-ul my-4">
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Prefix for Autonumber</code> 
+                <div class="pl-1">The default letters that preceed the ID number. I suggest no more than 4.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Number System</code> 
+                <div class="pl-1">
+                  The initial amount of numbers you want shown in the ID.<br>
+                  0 = CHA1<br>
+                  00 = CHA01<br>
+                  000 = CHA001<br>
+                  and so on and so forth.
+                </div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>MYO Placeholder Image</code>
+                <div class="pl-1">
+                  <p>The default image you want shown if there isn't a design yet.</p>
+                </div>
+              </li>
+            </ul>
+            <hr>
+            <p>The following will be used to fill out the log dropdowns (a QOL feature for logging) and to add species specific prefixes or MYO images.</p>
+            <ul class="fa-ul my-4">
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Design Types</code>
+                <div class="pl-1">List of design types. (I use this to separate MYOs, Guests Designs, and Official Designs).</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Statuses</code>
+                <div class="pl-1">List of trade statuses.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Transaction Types</code>
+                <div class="pl-1">List of transactions types.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Species</code>
+                <div class="pl-1">List of species.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>Prefixes</code>
+                <div class="pl-1">List of prefixes for the autonumber that will be used based on the species of the entry. Once you fill this out, the autonumber will stop using the default prefix completely for all entries.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><code>MYO Placeholder</code>
+                <div class="pl-1">List of MYO images that will be used based on the species of the entry.</div>
+              </li>
+            </ul>
+          </div>
+          <hr class="my-5">
+          <h4 class="mb-3 text-muted">Masterlist Log</h4>
+          <div class="pl-4 mb-5">
+            <p>This is the list of columns in the Masterlist Log sheet. If a column is optional, that means you can remove it without breaking charadex.</p>
+            <ul class="fa-ul my-4">
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Required]</b> <code>ID</code> 
+                <div class="pl-1">
+                  <p>This automatically adds a transaction number to your new entry. <b>Do not edit this at all.</b> If you add your own ID number, it will break the formula.</p>
+                  <p><b>Note:</b> The number will not reset when you add a new entry with a new species. This is a limitation of Google Sheets.</p>
+                </div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Required]</b> <code>Update ID</code> 
+                <div class="pl-1">If your updating an old entry, fill this in with said entry's ID.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Image</code>
+                <div class="pl-1">
+                  <p>The image for said entry. <b>This column has a special formula</b> - only delete this column if your dead set on never using images.</p>
+                  <p>If you don't want to use it but don't want to delete it, highlight the entire image column, right click, and select 'hide column'.</p>
+                </div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Species</code>
+                <div class="pl-1">The dropdown will fill with the list of species you made in <code>Options</code>. If you've also filled out the prefixes list, it will change the number prefix to the one you assigned for the species.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Owner</code>
+                <div class="pl-1">Owner of design at time of logging.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Artist</code>
+                <div class="pl-1">Artist of image at time of logging.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Designer</code>
+                <div class="pl-1"> Designer of design at time of logging.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Worth</code>
+                <div class="pl-1"> Worth of design at time of logging.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Status</code>
+                <div class="pl-1"> Trade status of design at time of logging. The dropdown will fill with the list of statuses you made in <code>Options</code>.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Design Type</code>
+                <div class="pl-1"> Type of design. The dropdown will fill with the list of design types you made in <code>Options</code>.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Transaction Type</code>
+                <div class="pl-1"> If it's a new entry, traded, etc. The dropdown will fill with the list of transaction types you made in <code>Options</code>.</div>
+              </li>
+              <li class="mb-3">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Notes</code>
+                <div class="pl-1"> Any extra notes about the design. These will be overwritten if you update them via a new line so stay frosty!</div>
+              </li>
+              <li class="mb-2">
+                <i class="fa-light fa-chevron-right fa-li"></i><b class="text-primary">[Optional]</b> <code>Proof</code>
+                <div class="pl-1"> Proof of transaction.</div>
+              </li>
+            </ul>
+          </div>
+          <hr class="my-5">
+          <h4 class="mb-3 text-muted">Public Masterlist</h4>
+          <div class="pl-4 mb-5">
+            <p>This is the final conglomerate of the logs, and the sheet you'll be pulling information from.</p>
+            <p>You'll only need to edit this sheet if you're adding extra columns.</p>
+          </div>
+          <div class="card bg-faded p-4 mb-5">
+            <h4 class="text-primary mb-3"><i class="fal fa-exclamation-circle fa-fw"></i> Warnings</h4>
+            <div class="text-muted pl-3">
+              <ul class="fa-ul mb-0">
+                <li class="mb-2"><i class="fa-light fa-chevron-right fa-li"></i> Original log entries should not be deleted - it will shift the ID numbers.</li>
+                <li class="mb-2"><i class="fa-light fa-chevron-right fa-li"></i> I do not recommend logging URLs anywhere other than the <code>Image</code> column.</li>
+                <li><i class="fa-light fa-chevron-right fa-li"></i> Adding more images will require knowledge of JS and List.js to show them on site.</b></li>
+              </ul>
+            </div>
+          </div>
+          <hr class="my-5">
+          <h3 class="text-primary mb-4"><small>Section II</small><br>Manipulating Sheet Data</h3>
+          <hr class="my-5">
+          <h3 class="text-primary mb-5">Adding an Entry</h3>
+          <img class="img-fluid"
+            src="images/newentry.gif">
+          <div class="my-5">
+            <p><b>Step One:</b> Right click on row 2 and then click Insert 1 Above.</p>
+            <p><b>Step Two:</b> Add information. If it's a new entry, leave <code>Updated ID</code> blank. If you're
+              updating, make sure to write out the ID.</p>
+            <p><b>Step Three:</b> You're done! But make sure to check the bank once you're done in case something doesn't
+              look right.</p>
+          </div>
+          <hr>
+          <h3 class="text-primary mb-5">Changing Usernames</h3>
+          <img class="img-fluid" src="images/replacename.gif">
+          <div class="my-5">
+            <p><b>Step One:</b> In the log, press <code>CTRL + F</code> and then type in the old username.</p>
+            <p><b>Step Two:</b> Press the button with 3 dots and enter the Replace with portion with the new username.</p>
+            <p><b>Step Three:</b> Press Replace all and you're done!</p>
+          </div>
+          <hr>
+          <h3 class="text-primary mb-5">Adding Traits (to the Sheet Only)</h3>
+          <img class="img-fluid" src="images/newtrait1.gif">
+          <div class="my-5">
+            <p><b>Step One:</b> Make the trait row in the Log table, I recommend putting it after <u>Designer</u>.</p>
+          </div>
+          <img class="img-fluid" src="images/newtrait2.gif">
+          <div class="my-5">
+            <p><b>Step Two:</b> Make the same rows in the Masterlist table.</p>
+            <p><b>Step Three:</b> Click any of the headers that are <b>not</b> ID or Image. Press <code>ctrl + c</code> to
+              copy, THIS IS IMPORTANT. Do <b>not</b> just copy the formula from the formula bar.</p>
+            <p><b>Step Four:</b> Click on any of the new trait row headers and press <code>ctrl + v</code>. This will
+                paste the formula and automatically change the referenced cells so you don't have to change anything in the
+                formula.</p>
+          </div>
+          <div class="card bg-faded p-5 mb-5 border-primary">
+            <h4 class="text-primary"><i class="fal fa-exclamation-circle fa-fw"></i> Note</h4>
+            <blockquote class="text-muted">
+              <p>If you want to show these on the site, you'll need to edit the HTML in there as well. Please head <a
+                  href="site_setup.html">here</a> for more info.</p>
+            </blockquote>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <!-- --------------------------------------------------------------------
+  <-- Footer
+  <-------------------------------------------------------------------- -->
+  <div class="footer p-md-5 p-4 text-center" data-include="footer"></div>
+
+  <!-- ----------------------------------------------------------------- -->
+  <!-- JS                                                                -->
+  <!-- ----------------------------------------------------------------- -->
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+  <!-- Charadex Script -->
+  <script src="styles/main.js"></script>
+
+
+</body>
+</html>
