@@ -27,7 +27,7 @@ body {
   /* ============================================================= */
   /* Backgrounds
   ================================================================ */
-  --cd-body-background-color:            #ffffff;
+  --cd-body-background-color:            #f8f8f8;
   --cd-content-background-color:         #ffffff;
   --cd-faded-background-color:           #f8f8f8;
 
@@ -347,14 +347,14 @@ a:active {
   color: var(--cd-footer-text-color) !important;
 }
 
-.footer a {
+.footer a,
+.footer a:visited {
   color: var(--cd-footer-link-color) !important;
 }
 
 .footer a:hover,
 .footer a:focus,
-.footer a:active,
-.footer a:visited {
+.footer a:active {
   color: var(--cd-footer-link-color-hover) !important;
 }
 
