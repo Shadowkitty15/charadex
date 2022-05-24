@@ -270,10 +270,12 @@ a:active {
   background-color: var(--cd-navbar-background-color) !important;
   font-family: var(--cd-navbar-font-family) !important;
   z-index: 2000;
+  font-size: 125%;
 }
 
 .navbar .navbar-brand {
   color: var(--cd-navbar-brand-color) !important;
+  font-size: 125%;
 }
 
 .navbar .navbar-brand:hover, 
@@ -531,25 +533,24 @@ hr {
 /* Chee's Tweaks
 /* ============================================================= */
 
-html {
-  box-sizing: border-box;
-  scroll-behavior: smooth;    
-  font-size: 115%;
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  letter-spacing: .025rem;
-  line-height: 1.6;
 }
 
 /* Adds min height so footer stays at the bottom */
-.main-container {
+.masterlist-container {
   -ms-flex: 1 1 auto!important;
   flex: 1 1 auto!important;
+}
+
+/* Fades container in on load so its not as jarring */
+.masterlist-container {
+  opacity: 0;
+} .masterlist-container.softload {
+  opacity: 1;
+  transition: opacity 1s ease-out;
 }
 
 /* Remove ugly box shadow */
@@ -562,7 +563,7 @@ button:focus,
 
 /* Small container for more compact view */
 .container {
-  max-width: 900px !important;
+  max-width: 950px !important;
 }
 
 /* Make images not look ugly when resized */
@@ -570,12 +571,32 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
-code {
-  color: var(--cd-link-text-color);
-  background: var(--cd-faded-background-color);
-  border-radius: .5rem;
-  font-size: 90%;
-  margin: 0 .2rem;
-  padding: .15rem .5rem;
-  letter-spacing: 0;
+/* Prevents awkward load in stutter */
+#charadex-gallery .list .card-body {
+  min-height: calc(200px + 2.5rem);
+} #charadex-gallery .list .card-body img {
+  max-height: 200px;
+}
+
+/* Loading Icon */
+#loading {
+  width: 5rem; 
+  height: 5rem;
+  position: absolute;
+  top: calc(50% - 2.5rem);
+  left: calc(50% - 2.5rem);
+  animation-duration: 2s;
+  opacity: .5;
+  border-color: var(--cd-body-text-color);
+  border-right-color: transparent !important;
+}
+
+/* Combines search and its companion filter */
+#search-filter.form-control {
+  border-radius: var(--cd-border-radius) 0 0 var(--cd-border-radius) !important;
+  border-right: 0 !important;
+} #search.form-control {
+  margin-left: -.5rem;
+  width: calc(100% + .5rem) !important;
+  border-radius: 0 var(--cd-border-radius) var(--cd-border-radius) 0 !important;
 }

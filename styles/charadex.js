@@ -38,14 +38,13 @@ const charadex = (options) => {
   /* ==================================================================== */
   /* Importing Your Options
   ======================================================================= */
-
   let userOptions = options || {
     sheetID: "",
     sheetPage: "",
     itemAmount: "",
     itemOrder: "",
-    imageFolder: "",
     searchParams: "",
+    urlFilterParam: "",
   };
 
 
@@ -57,7 +56,7 @@ const charadex = (options) => {
 
 
   /* ==================================================================== */
-  /* Options
+  /* Sifting Through Options
   ======================================================================= */
   const charadexInfo = {
     sheetID: 
@@ -68,8 +67,8 @@ const charadex = (options) => {
     sheetPage: userOptions.sheetPage || "Public Masterlist",
     itemAmount: userOptions.itemAmount || 12,
     itemOrder: userOptions.itemOrder || "desc",
-    imageFolder: userOptions.imageFolder || false,
     searchParams: userOptions.searchParams || ['id', 'owner', 'artist', 'designer'],
+    urlFilterParam: userOptions.urlFilterParam.toLowerCase().replace(/\s/g,'') || false,
   };
 
 
@@ -111,12 +110,49 @@ const charadex = (options) => {
     .then(i => i.text())
     .then(JSON => {
 
+      $('#loading').hide();
+      $('.masterlist-container').addClass('softload');
 
       /* ================================================================ */
       /* And so it begins
       /* ================================================================ */
       let sheetArray = scrubData(JSON); // Clean up sheet data so we can use it
-      let preParam = url.href.includes('species') ? '&id=' : '?id='; // Determines which is used in a link
+      let preParam = url.search.includes(charadexInfo.urlFilterParam) ? '&id=' : '?id='; // Determines which is used in a link
+
+
+      /* ================================================================ */
+      /* URL Param Buttons
+      /* ================================================================ */
+      (() => {
+
+        if (sheetArray[0].hasOwnProperty(charadexInfo.urlFilterParam)) {
+
+          $('#filter-buttons').show();
+
+          let urlParamArray = [];
+          const uniqueArray = [...new Set(sheetArray.map(i => i[charadexInfo.urlFilterParam]))];
+          uniqueArray.forEach((i) => {
+            urlParamArray.push({
+              title: i,
+              link: url.href.split('&')[0].split('?')[0] + '?' + charadexInfo.urlFilterParam + '=' + i.toLowerCase(),
+            });
+          });
+      
+          // Sorts list
+          urlParamArray.sort((a, b) => {return a.title - b.title})
+        
+          // List.js options
+          let buttonOptions = {
+            valueNames: ['title', {name: 'link', attr: 'href'}],
+            item: 'charadex-filter-buttons',
+          };
+  
+          // Creates singular item
+          let urlParamButtons = new List("filter-buttons", buttonOptions, urlParamArray);
+
+        }
+
+      })();
         
 
       /* ================================================================ */
@@ -124,24 +160,12 @@ const charadex = (options) => {
       /* ================================================================ */
       (() => {
 
-        console.log(sheetArray);
-
         let len = sheetArray.length;
         while (len--) {
 
           // Adding link
           sheetArray[len].link = url.href + preParam + sheetArray[len].id;
-
-          // Adding images (if you choose to upload to your site instead)
-          if (charadexInfo.imageFolder && !sheetArray[0].hasOwnProperty('image')) {
-            sheetArray[len].image = `${url.origin}/${charadexInfo.imageFolder}/myo.png`;
-            if (sheetArray[len].designer && sheetArray[len].artist) {
-              sheetArray[len].image = `${url.origin}/${charadexInfo.imageFolder}/${sheetArray[len].id}.png`;
-            } else if (sheetArray[len].species != '' && (sheetArray[len].designer == '' && sheetArray[len].artist == '')) {
-              sheetArray[len].image = `${url.origin}/${charadexInfo.imageFolder}/myo_${sheetArray[len].species.toLowerCase()}.png`;
-            }
-          }
-
+          
           // Add vanila ID so it'll sort nicer
           sheetArray[len].orderID = sheetArray[len].id.replace(/\D+/gm,"");
 
@@ -150,8 +174,8 @@ const charadex = (options) => {
         // Sorts list from small to beeg number
         sheetArray.sort((a, b) => {return a.orderID - b.orderID})
 
-        // Filters out species based on URL parameters
-        if (urlParams.has('species')) {sheetArray = sheetArray.filter((i) => i.species.toLowerCase() === urlParams.get('species').toLowerCase());}
+        // Filters out information based on URL parameters
+        if (urlParams.has(charadexInfo.urlFilterParam) && charadexInfo.urlFilterParam) {sheetArray = sheetArray.filter((i) => i[charadexInfo.urlFilterParam].toLowerCase() === urlParams.get(charadexInfo.urlFilterParam).toLowerCase());}
 
       })();
 
@@ -234,7 +258,7 @@ const charadex = (options) => {
         /* ================================================================ */
         /* Charadex Gallery
         /* ================================================================ */
-        $('#charadex-shit').show();
+        $('#charadex-filters').show();
 
         (() => { 
 
@@ -263,7 +287,7 @@ const charadex = (options) => {
           $("#filter").on('change', () => {
             let selection = $("#filter option:selected").text().toLowerCase();
             let filterType = $("#filter").attr('filter');
-            if (selection && selection != 'all') {
+            if (selection && !selection.includes('all')) {
               charadex.filter(function (i) {return i.values()[filterType].toLowerCase() == selection;});
             } else {
               charadex.filter();
