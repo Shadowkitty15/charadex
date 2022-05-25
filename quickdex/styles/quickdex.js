@@ -288,8 +288,8 @@ $(document).ready(function(){
 
     console.log(cssArray.owner);
                               
-    let speciesTitle = (!cssArray.species.includes('undefined')) ? cssArray.species : "Charadex";
-    let speciesOwner = (!cssArray.owner.includes('undefined')) ? "Owned by " + cssArray.owner : (cssArray.species) ? "Owned by a mysterious person..." : "Created by Cheeriko";
+    let speciesTitle = (cssArray.species !== undefined) ? cssArray.species : "Charadex";
+    let speciesOwner = (cssArray.owner !== undefined) ? "Owned by " + cssArray.owner : (cssArray.species) ? "Owned by a mysterious person..." : "Created by Cheeriko";
 
     document.title = speciesTitle;
     $("#speciestitle").html(speciesTitle);
@@ -338,8 +338,8 @@ $(document).ready(function(){
       cssCustomization(cssArray);
 
       let finalUrl = `?custom=true${formParams.join("")}`;
-      $('#plainLink').html(finalUrl);
-      $('#hyperLink').attr("href", finalUrl);
+      $('#plainLink').html(url + finalUrl);
+      $('#hyperLink').attr("href", url + finalUrl);
 
     });
 

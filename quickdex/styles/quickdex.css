@@ -51,11 +51,11 @@ body {
   /* ============================================================= */
   /* Navbar
   ================================================================ */
-  --cd-navbar-background-color:          #222222;
+  --cd-navbar-background-color:          #111111;
   --cd-navbar-brand-color:               var(--cd-primary-color);
-  --cd-navbar-brand-color-hover:         var(--cd-secondary-color);
-  --cd-navbar-text-color:                var(--cd-content-background-color);
-  --cd-navbar-link-color:                var(--cd-navbar-text-color);
+  --cd-navbar-brand-color-hover:         #dddddd;
+  --cd-navbar-text-color:                var(--cd-navbar-brand-color-hover);
+  --cd-navbar-link-color:                var(--cd-navbar-brand-color-hover);
   --cd-navbar-link-color-hover:          var(--cd-primary-color);
   --cd-navbar-font-family:               var(--cd-header-font-family);
   
@@ -85,7 +85,7 @@ body {
 
   /* Divider */
   --cd-navbar-dropdown-divider:          rgba(255,255,255,.12);
-  --cd-navbar-dropdown-border-radius:    0 0 var(--cd-border-radius) var(--cd-border-radius);
+  --cd-navbar-dropdown-border-radius:    0 0 .5rem .5rem;
 
 
   /* ============================================================= */
@@ -485,7 +485,7 @@ a:active {
 }
 
 .text-muted {
-  color: var(--cd-faded-text-color) !important;
+  color: var(--cd-body-text-color) !important;
 }
 
 h1, h2, h3,
