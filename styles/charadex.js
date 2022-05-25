@@ -24,21 +24,9 @@ $(document).on("click", "#toggle", function() {
 const charadex = (options) => {
 
   /* ==================================================================== */
-  /* Importing Your Options
+  /* Options & URL
   ======================================================================= */
-  let userOptions = options || {
-    sheetID: "",
-    sheetPage: "",
-    itemAmount: "",
-    itemOrder: "",
-    searchParams: "",
-    urlFilterParam: "",
-  };
-
-
-  /* ==================================================================== */
-  /* URL
-  ======================================================================= */
+  let userOptions = options || {};
   let url = new URL(window.location.href);
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -47,16 +35,12 @@ const charadex = (options) => {
   /* Sifting Through Options
   ======================================================================= */
   const charadexInfo = {
-    sheetID: 
-      (userOptions.sheetID.includes('/d/')) 
-      ? userOptions.sheetID.split('/d/')[1].split('/edit')[0] 
-      : userOptions.sheetID 
-      || "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
-    sheetPage: userOptions.sheetPage || "Public Masterlist",
-    itemAmount: userOptions.itemAmount || 12,
-    itemOrder: userOptions.itemOrder || "desc",
-    searchParams: userOptions.searchParams || ['id', 'owner', 'artist', 'designer'],
-    urlFilterParam: userOptions.urlFilterParam.toLowerCase().replace(/\s/g,'') || false,
+    sheetID: userOptions.sheetID ? userOptions.sheetID.includes('/d/') ? userOptions.sheetID.split('/d/')[1].split('/edit')[0] : userOptions.sheetID : "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
+    sheetPage: userOptions.sheetPage ? userOptions.sheetPage : "Public Masterlist",
+    itemAmount: userOptions.itemAmount ? userOptions.itemAmount : 12,
+    itemOrder: userOptions.itemOrder ? userOptions.itemOrder : "desc",
+    searchParams: userOptions.searchParams ? userOptions.searchParams : ['id', 'owner', 'artist', 'designer'],
+    urlFilterParam: userOptions.urlFilterParam ? userOptions.urlFilterParam.toLowerCase().replace(/\s/g,'') : false,
   };
 
 
