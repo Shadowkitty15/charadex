@@ -105,7 +105,7 @@ body {
   /* Link
   ================================================================ */
 
-  --cd-link-text-color:                  #4c8ebd;
+  --cd-link-text-color:                  var(--cd-primary-color);
   --cd-link-text-color-hover:            var(--cd-secondary-color);
 
 
@@ -193,35 +193,6 @@ body {
   --cd-input-border-color-hover:         var(--cd-primary-color);
   --cd-input-border-radius:              var(--cd-border-radius);
 
-}
-
-body.dark {
-  /* ============================================================= */
-  /* Backgrounds
-  ================================================================ */
-  --cd-body-background-color:            #2e2e2e;
-  --cd-content-background-color:         #313131;
-  --cd-faded-background-color:           #2a2a2a;
-
-  /* Background Extras */
-  --cd-body-background-image:              url();
-
-  /* ============================================================= */
-  /* Text
-  ================================================================ */
-  --cd-body-text-color:                  #f0f0f0;
-  --cd-faded-text-color:                 #a8a8a8;
-  --cd-navbar-text-color:                var(--cd-faded-text-color);
-  --cd-link-text-color:                  var(--cd-primary-color);
-
-  /* ============================================================= */
-  /* Borders
-  ================================================================ */
-  --cd-border-color:                     rgba(255,255,255,.12);
-}
-
-body.dark img {
-  filter: invert(1) saturate(0.5) brightness(1.25) contrast(.75);
 }
 
 
@@ -590,12 +561,18 @@ img {
   border-right-color: transparent !important;
 }
 
-/* Combines search and its companion filter */
-#search-filter.form-control {
-  border-radius: var(--cd-border-radius) 0 0 var(--cd-border-radius) !important;
-  border-right: 0 !important;
-} #search.form-control {
-  margin-left: -.5rem;
-  width: calc(100% + .5rem) !important;
-  border-radius: 0 var(--cd-border-radius) var(--cd-border-radius) 0 !important;
+/* Color Input */
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 1px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+	border: 0;
+  border-radius: var(--cd-border-radius);
 }

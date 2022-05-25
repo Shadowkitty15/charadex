@@ -1,10 +1,10 @@
-<p align="center">
+<p align="center">Do not download from this page - please download the latest version [here]().</p>
 
-## Do not download from this page - please download the latest version [here]().
-
-</p>
+&nbsp;
 
 ---
+
+&nbsp;
 
 # Charadex v.4.0
 
