@@ -1,21 +1,10 @@
-/* ==================================================================== */
-/* Dark/Light Toggle
-======================================================================= */
-  
-const bodyClass = document.body.classList;
+let yourOptions = {
 
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && localStorage.getItem('toggle') == null) {
-  bodyClass.add('dark');
-} if (localStorage.getItem('toggle') == 'true') {
-  bodyClass.add('dark');
-}
+  // Sheet Information
+  sheetID: "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
+  sheetPage: "Public Masterlist",
 
-$(document).on("click", "#toggle", function() {
-  bodyClass.contains('dark')
-    ? (bodyClass.remove('dark'))
-    : (bodyClass.add('dark')); 
-  localStorage.setItem('toggle', bodyClass.contains('dark'));
-}); 
+};
 
 
 /* ==================================================================== */
@@ -24,9 +13,14 @@ $(document).on("click", "#toggle", function() {
 const charadex = (options) => {
 
   /* ==================================================================== */
-  /* Options & URL
+  /* Importing Your Options
   ======================================================================= */
-  let userOptions = options || {};
+  let userOptions = options;
+
+
+  /* ==================================================================== */
+  /* URL
+  ======================================================================= */
   let url = new URL(window.location.href);
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -35,12 +29,15 @@ const charadex = (options) => {
   /* Sifting Through Options
   ======================================================================= */
   const charadexInfo = {
-    sheetID: userOptions.sheetID ? userOptions.sheetID.includes('/d/') ? userOptions.sheetID.split('/d/')[1].split('/edit')[0] : userOptions.sheetID : "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
-    sheetPage: userOptions.sheetPage ? userOptions.sheetPage : "Public Masterlist",
-    itemAmount: userOptions.itemAmount ? userOptions.itemAmount : 12,
-    itemOrder: userOptions.itemOrder ? userOptions.itemOrder : "desc",
-    searchParams: userOptions.searchParams ? userOptions.searchParams : ['id', 'owner', 'artist', 'designer'],
-    urlFilterParam: userOptions.urlFilterParam ? userOptions.urlFilterParam.toLowerCase().replace(/\s/g,'') : false,
+    sheetID: 
+      (userOptions.sheetID.includes('/d/')) 
+      ? userOptions.sheetID.split('/d/')[1].split('/edit')[0] 
+      : userOptions.sheetID 
+      || "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
+    sheetPage: userOptions.sheetPage || "Public Masterlist",
+    itemAmount: userOptions.itemAmount || 12,
+    itemOrder: userOptions.itemOrder || "desc",
+    searchParams: userOptions.searchParams || ['id', 'owner', 'artist', 'designer'],
   };
 
 
@@ -56,7 +53,7 @@ const charadex = (options) => {
     if (cleanJson.table.cols[0].label) {
       cleanJson.table.cols.forEach((headers) => {
         if (headers.label) {
-          col.push(headers.label.toLowerCase().replace(/\s/g, ""));
+          col.push(headers.label.toLowerCase().replace(/\s/g, "-"));
         }
       });
     }
@@ -89,46 +86,7 @@ const charadex = (options) => {
       /* And so it begins
       /* ================================================================ */
       let sheetArray = scrubData(JSON); // Clean up sheet data so we can use it
-      let preParam = url.search.includes(charadexInfo.urlFilterParam) ? '&id=' : '?id='; // Determines which is used in a link
-
-
-      /* ================================================================ */
-      /* URL Param Buttons
-      /* ================================================================ */
-      (() => {
-
-        if (sheetArray[0].hasOwnProperty(charadexInfo.urlFilterParam)) {
-
-          $('#filter-buttons').show();
-
-          // Creates Param Object Array
-          let urlParamArray = [];
-          const uniqueArray = [...new Set(sheetArray.map(i => i[charadexInfo.urlFilterParam]))];
-          uniqueArray.forEach((i) => {
-            urlParamArray.push({
-              title: i,
-              link: url.href.split('&')[0].split('?')[0] + '?' + charadexInfo.urlFilterParam + '=' + i.toLowerCase(),
-            });
-          });
-
-          // Adds All Button
-          urlParamArray.unshift({ title: 'All', link: url.href.split('&')[0].split('?')[0]});
-      
-          // Sorts list
-          urlParamArray.sort((a, b) => {return a.title - b.title});
-        
-          // List.js options
-          let buttonOptions = {
-            valueNames: ['title', {name: 'link', attr: 'href'}],
-            item: 'charadex-filter-buttons',
-          };
-  
-          // Creates singular item
-          let urlParamButtons = new List("filter-buttons", buttonOptions, urlParamArray);
-
-        }
-
-      })();
+      let preParam = '&id='; // Determines which is used in a link
         
 
       /* ================================================================ */
@@ -136,22 +94,37 @@ const charadex = (options) => {
       /* ================================================================ */
       (() => {
 
-        let len = sheetArray.length;
-        while (len--) {
+        let filteredArray = [];
 
-          // Adding link
-          sheetArray[len].link = url.href + preParam + sheetArray[len].id;
-          
-          // Add vanila ID so it'll sort nicer
-          sheetArray[len].orderID = sheetArray[len].id.replace(/\D+/gm,"");
-
+        for (let i = 0; i < sheetArray.length; i++) {
+          const removed = ['id', 'image','link',''];
+          const filtered = Object.fromEntries(
+            Object.entries(sheetArray[i]).filter(
+              ([key, val])=>!removed.includes(key)
+            )
+          );
+          filteredArray.push(filtered);
         }
-      
-        // Sorts list from small to beeg number
-        sheetArray.sort((a, b) => {return a.orderID - b.orderID})
 
-        // Filters out information based on URL parameters
-        if (urlParams.has(charadexInfo.urlFilterParam) && charadexInfo.urlFilterParam) {sheetArray = sheetArray.filter((i) => i[charadexInfo.urlFilterParam].toLowerCase() === urlParams.get(charadexInfo.urlFilterParam).toLowerCase());}
+        for (let i = 0; i < filteredArray.length; i++) {
+          let bigArrayKeys = Object.keys(filteredArray[i]);
+          let bigArrayValues = Object.values(filteredArray[i]);
+          let joinedInfo = [];
+          for (let i = 0; i < bigArrayKeys.length; i++) {
+            joinedInfo.push(`
+            <div class='p-1 px-3 d-flex justify-content-between text-capitalize'>
+              <b>${bigArrayKeys[i].replaceAll('-', ' ')}</b>
+              <span>${bigArrayValues[i]}</span>
+            </div>`);
+          }
+          sheetArray[i].HTML = joinedInfo.join("");
+        }
+
+        for (let i = 0; i < sheetArray.length; i++) {
+          sheetArray[i].link = url.href + preParam + sheetArray[i].id;
+          sheetArray[i].orderID = sheetArray[i].id.replace(/\D+/gm,"");
+          sheetArray.sort((a, b) => {return a.orderID - b.orderID})
+        }
 
       })();
 
@@ -194,7 +167,6 @@ const charadex = (options) => {
 
               // Next
               if (sheetArray[len + 1]) {
-                console.log(sheetArray[len + 1]);
                 $("#entryNext").attr("href", url.href.split('?id')[0].split('&id')[0] + preParam + sheetArray[len + 1].id);
                 $("#entryNext span").text(sheetArray[len + 1].id);
               } else {
@@ -205,7 +177,7 @@ const charadex = (options) => {
           }
 
           // Back to masterlist (keeps species parameter)
-          $("#masterlistLink").attr("href", url.href.split('?id')[0].split('&id')[0]);
+          $("#masterlistLink").attr("href", url.href.split('&id')[0]);
 
         })();
 
@@ -256,32 +228,14 @@ const charadex = (options) => {
 
           // Sort based on ID
           charadex.sort("orderID", {order: charadexInfo.itemOrder,})
-
-          /* ================================================================ */
-          /* Custom Filter
-          /* ================================================================ */
-          $("#filter").on('change', () => {
-            let selection = $("#filter option:selected").text().toLowerCase();
-            let filterType = $("#filter").attr('filter');
-            if (selection && !selection.includes('all')) {
-              charadex.filter(function (i) {return i.values()[filterType].toLowerCase() == selection;});
-            } else {
-              charadex.filter();
-            }
-          });
           
 
           /* ================================================================ */
           /* Search Filter
           /* ================================================================ */
-          $("#search-filter").on('change', () => {
-            let selection = [$("#search-filter option:selected").text().toLowerCase()];
-            if (selection && !selection.includes('all')) {
-              $('#search').on('keyup', () => {
-                let searchString = $('#search').val();
-                charadex.search(searchString, selection);
-              });
-            }
+          $('#search').on('keyup', () => {
+            let searchString = $('#search').val();
+            charadex.search(searchString);
           });
           
 
@@ -299,4 +253,98 @@ const charadex = (options) => {
 };
 
 
+$(document).ready(function(){
 
+  // Fetching URL Parameters
+  const url = window.location.href.split('?')[0].split('&')[0];
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Customize Page
+  const cssCustomization = (arr) => {
+
+    let cssArray = arr;
+
+    let cssProperties = {
+      '--cd-primary-color': `#${cssArray.primary}`,
+      '--cd-primary-text-color': `#${cssArray.primaryfont}`,
+      '--cd-secondary-color': `#${cssArray.secondary}`,
+      '--cd-secondary-text-color': `#${cssArray.secondaryfont}`,
+      '--cd-body-background-color': `#${cssArray.bodybg}`,
+      '--cd-content-background-color': `#${cssArray.containerbg}`,
+      '--cd-faded-background-color': `#${cssArray.fadedbg}`,
+      '--cd-body-text-color': `#${cssArray.fontcolor}`,
+      '--cd-border-color': `#${cssArray.bordercolor}`,
+      '--cd-border-width': `${cssArray.borderwidth}`,
+      '--cd-border-style': `${cssArray.borderstyle}`,
+      '--cd-border-radius': `${cssArray.borderradius}`
+    };
+
+    for (const property in cssProperties) {
+      if (!cssProperties[property].includes('undefined')) {
+        $("body").css(property, cssProperties[property]);
+      }
+    }
+
+    console.log(cssArray.owner);
+                              
+    let speciesTitle = (cssArray.species !== undefined) ? cssArray.species : "Charadex";
+    let speciesOwner = (cssArray.owner !== undefined) ? "Owned by " + cssArray.owner : (cssArray.species) ? "Owned by a mysterious person..." : "Created by Cheeriko";
+
+    document.title = speciesTitle;
+    $("#speciestitle").html(speciesTitle);
+    $("#speciestitle").attr("href", window.location.href.split('?id=')[0]);
+    $("#speciescreator").html(speciesOwner);
+
+  }
+
+  // Customized Sheet
+  if (urlParams.has('custom')) {
+
+    const entries = urlParams.entries();
+    const cssArray = new Object;
+
+    for(const [key, value] of entries) {
+      if (value && value.toLowerCase() !== "#f2f2f1") {
+        cssArray[key] = value.replaceAll("#","");
+      }
+    }
+
+    cssCustomization(cssArray);
+
+    yourOptions.sheetID = cssArray.sheetid;
+    yourOptions.sheetPage = cssArray.masterlist;
+
+    charadex(yourOptions);
+
+  } else {
+    
+    $('#myform').show();
+
+    // Creates
+    $('#getParams').on('click',function(){
+
+      let formArray = $("form").serializeArray();
+      let cssArray = new Object;
+      let formParams = new Array;
+
+      for (let i = 0; i < formArray.length; i++) {
+        if (formArray[i].value && formArray[i].value.toLowerCase() !== "#f2f2f1") {
+          cssArray[formArray[i].name] = formArray[i].value.replaceAll("#","");
+          formParams.push(`&${formArray[i].name}=${formArray[i].value.replaceAll("#","")}`);
+        }
+      }
+
+      cssCustomization(cssArray);
+
+      let finalUrl = `?custom=true${formParams.join("")}`;
+      $('#plainLink').html(url + finalUrl);
+      $('#hyperLink').attr("href", url + finalUrl);
+
+    });
+
+    charadex(yourOptions);
+
+  }
+
+});

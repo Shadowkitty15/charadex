@@ -11,13 +11,13 @@
   <!-- ----------------------------------------------------------------- -->
 
   <!-- Website's icon in the browser -->
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="../favicon.png"/>
 
   <!-- Title of your site -->
-  <title>Charadex</title>
+  <title>Quickdex</title>
 
   <!-- Description of your site -->
-  <meta name="description" content="An automated masterlist for your species!">
+  <meta name="description" content="Take a quicklook at this...">
 
 
   <!-- ----------------------------------------------------------------- -->
@@ -40,7 +40,7 @@
   <!-- ----------------------------------------------------------------- -->
   
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="styles/charadex.css">
+  <link rel="stylesheet" type="text/css" href="styles/quickdex.css">
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400|Comfortaa:500" rel="stylesheet">
@@ -49,31 +49,6 @@
 </head>
 <body>
 
-  <script>
-    /* ------------------------------------------------------------------- */
-    /* Options
-    /* You can remove the items you're not using
-    /* ------------------------------------------------------------------- */
-    let yourOptions = {
-
-      // Sheet Information
-      sheetID: "1l_F95Zhyj5OPQ0zs-54pqacO6bVDiH4rlh16VhPNFUc",
-      sheetPage: "Public Masterlist",
-
-      // Amount of items shown on the page. Default is 12.
-      itemAmount: 12,
-
-      // Ascending  (1 2 3) || asc
-      // Descending (3 2 1) || desc
-      itemOrder: "desc",
-
-      // Creates 1 URL parameter that will filter the list based on a
-      // column of your choosing.
-      urlFilterParam: 'species',
-
-    };
-  </script>
-
   <!-- --------------------------------------------------------------------
   <-- Navbar 
   <-------------------------------------------------------------------- -->
@@ -81,7 +56,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="#"><i class="fa-solid fa-box-heart fa-fw"></i> Charadex</a>
+      <a class="navbar-brand" href="../quickdex"><i class="fa-solid fa-rabbit-running"></i> Quickdex</a>
     
       <!-- Toggle -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#charadexnav">
@@ -91,24 +66,9 @@
       <!-- Links -->
       <div class="collapse navbar-collapse" id="charadexnav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown"><i class="fa-solid fa-circle-question d-md-inline d-none"></i><span class="d-md-none">Resources</span></a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" target="_blank" href="">Download Latest</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki">Wiki</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki/Getting-Started">Getting Started</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki/Sheet-Set-Up">Sheet Set-Up</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki/Site-Set-Up">Site Set-Up</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="https://github.com/cheeriko/charadex/tree/main/custom_style_library">Custom Style Library</a>
-              <a class="dropdown-item d-none" target="_blank" href="#">Quickdex</a>
-            </div>
-          </li>
-          <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/cheeriko/charadex"><i class="fa-solid fa-rabbit-running fa-fw d-md-inline d-none"></i><span class="d-md-none">Quickdex</span></a></li>
+          <li class="nav-item"><a class="nav-link" target="_blank" href=".."><i class="fa-solid fa-box-heart fa-fw d-md-inline d-none"></i><span class="d-md-none">Charadex</span></a></li>
           <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/cheeriko/charadex"><i class="fa-brands fa-github-alt fa-fw d-md-inline d-none"></i><span class="d-md-none">Github</span></a></li>
           <li class="nav-item"><a class="nav-link" target="_blank" href="https://ko-fi.com/cheeriko"><i class="fa-solid fa-mug fa-fw d-md-inline d-none"></i><span class="d-md-none">Support</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)" id="toggle"><i class="fa-solid fa-moon-over-sun fa-fw d-md-inline d-none"></i><span class="d-md-none">Dark Mode</span></a></li>
         </ul>
       </div>
     
@@ -122,11 +82,142 @@
   <-------------------------------------------------------------------- -->
   <div class="container masterlist-container d-flex flex-column py-md-5 py-4">
 
-    <!-- URL Param Filter Buttons Render
-    <-- Remove this if you'd like to make your own buttons instead!
+    <form class="card mb-4" style="display: none;" id="myform">
+      <h2 class="card-header text-center py-4">Create Your Charadex</h2>
+      <div class="p-5">
+        <fieldset class="row no-gutters m-n3">
+
+          <div class="col-12 p-3 text-muted">
+            <p>This is a simple tool that outputs a slightly customized version of your charadex Google Sheet - just in case you don't want to host your own.</p>
+            <p>If you don't have a sheet, you can copy it <a target="_blank" href="">here</a>. Just fill it out, make the link public to viewers, and add the ID in below!</p>
+          </div>
+
+          <div class="col-12"><hr></div>
+
+          <div class="col-md-6 p-3">
+            <label for="speciesname"><b>Species Name</b></label>
+            <input class="form-control" name="species" type="text" placeholder="Charadex">
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="speciesowner"><b>Species Owner</b></label>
+            <input class="form-control" name="owner" type="text" placeholder="Cheeriko"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="sheetid"><b>Sheet ID</b></label>
+            <input class="form-control" name="sheetid" value="18SMfCx05l0E5CS9DHC2xb6cLY2eRcJ0PjWQRlYATdRE">
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="masterlistname"><b>Masterlist Name</b></label>
+            <input class="form-control" name="masterlist" value="masterlist"></input>
+          </div>
+
+          <div class="col-12"><hr></div>
+
+          <div class="col-md-6 p-3">
+            <label for="primaryaccent"><b>Primary Accent Color</b></label>
+            <input class="form-control" type="color" name="primary" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="secondaryaccent"><b>Secondary Accent Color</b></label>
+            <input class="form-control" type="color" name="secondary" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="accentfont"><b>Primary Accent Text Color</b></label>
+            <input class="form-control" type="color" name="primaryfont" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="accentfont"><b>Secondary Accent Text Color</b></label>
+            <input class="form-control" type="color" name="secondaryfont" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-12"><hr></div>
+
+          <div class="col-md-6 p-3">
+            <label for="backgroundcolor"><b>Body Background Color</b></label>
+            <input class="form-control" type="color" name="bodybg" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="containerbackground"><b>Content Background Color</b></label>
+            <input class="form-control" type="color" name="containerbg" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="fadedbackground"><b>Faded Background Color</b></label>
+            <input class="form-control" type="color" name="fadedbg" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <label for="fontcolor"><b>Font Color</b></label>
+            <input class="form-control" type="color" name="fontcolor" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-12"><hr></div>
+
+          <div class="col-md-3 p-3">
+            <label for="bordercolor"><b>Border Color</b></label>
+            <input class="form-control" type="color" name="bordercolor" value="#f2f2f1"></input>
+          </div>
+
+          <div class="col-md-3 p-3">
+            <label for="borderwidth"><b>Border Width</b></label>
+            <input class="form-control" type="number" name="borderwidth"></input>
+          </div>
+
+          <div class="col-md-3 p-3">
+            <label for="borderstyle"><b>Border Style</b></label>
+            <select class="form-control" name="borderstyle" name="borderstyle">
+              <option selected="selected" value=""></option>
+              <option value="dotted">Dotted</option>
+              <option value="dashed">Dashed</option>
+              <option value="solid">Solid</option>
+              <option value="double">Double</option>
+              <option value="none">None</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 p-3">
+            <label for="borderradius"><b>Border Radius</b></label>
+            <input class="form-control" type="number" name="borderradius"></input>
+          </div>
+
+          <div class="col-12"><hr></div>
+
+          <div class="col-12 p-3">
+            <input class="btn btn-primary d-block w-100" type="button" id="getParams" />
+          </div>
+          <div class="col-12 p-3">
+            <div class="card h-100 p-3" id="plainLink">
+
+            </div>
+          </div>
+          <div class="col-12 p-3">
+            <a id="hyperLink" class="btn btn-primary d-block" href="" target="_blank">View Page</a>
+          </div>
+          
+
+        </fieldset>
+      </div> 
+    </form>
+      
+    <!-- Intro
     ------------------------------------------------------------------- -->
-    <div class="card p-4 mb-4" style="display:none;" id="filter-buttons">
-      <ul class="row no-gutters list list-unstyled m-n2"></ul>
+    <div class="card p-5 mb-4">
+      <div class="row">
+        <div class="col-auto my-auto">
+          <i class="fal fa-book-open text-primary fa-4x"></i>
+        </div>
+        <div class="col my-auto">
+          <h2 class="m-0"><a href="" id="speciestitle">Quickdex</a></h2>
+          <div id="speciescreator">Created by Cheeriko</div>
+        </div>
+      </div>
     </div>
 
 
@@ -140,40 +231,13 @@
       <div class="card p-4 mb-4 sticky-top" style="display:none;" id="charadex-filters">
         <div class="row no-gutters m-n2">
 
-          <!-- Custom Filter (Optional) 
-          <-- Fill in the <option></options> with the items you want it to filter
-              through. Make sure that filter="" matches the column with said items.
-              Do not remove 'All' -->
-          <div class="col-md-2 col-12 p-1">
-            <select class="form-control bg-faded" filter="designtype" id="filter">
-              <option>All</option>
-              <option>Official Design</option>
-              <option>Guest Design</option>
-              <option>MYO Design</option>
-            </select>
-          </div>
-
-          <!-- Search Filter (Optional)
-          <-- Fill in the <option></options> with the items you want it to filter
-              through. 
-              Do not remove 'All' -->
-          <div class="col-md-2 col-3 p-1">
-            <select class="form-control bg-faded" id="search-filter">
-              <option>All</option>
-              <option>Worth</option>
-              <option>Owner</option>
-              <option>Designer</option>
-              <option>Artist</option>
-            </select>
-          </div>
-
           <!-- Search Bar (Optional) -->
-          <div class="col-md-3 col-9 p-1">
+          <div class="col-md-6 col-9 p-1">
             <input class="form-control bg-faded search" type="search" placeholder="Search" id="search">
           </div>
 
           <!-- Pagination -->
-          <div class="col-md-5 col-12 d-flex justify-content-md-end justify-content-center p-1">
+          <div class="col-md-6 col-12 d-flex justify-content-md-end justify-content-center p-1">
             <div class="nav d-flex">
               <div class="btn-prev page-item"><a class="page-link"><i class="bi bi-chevron-left"></i></a></div>
               <ul class="pagination pagination-top justify-content-center m-0"></ul>
@@ -189,8 +253,8 @@
       ----------------------------------------------------------------- -->
       <ul class="row no-gutters list list-unstyled m-n2"></ul>
 
-    </div>
 
+    </div>
   </div>
 
 
@@ -201,17 +265,13 @@
   <-------------------------------------------------------------------- -->
   <div class="footer p-md-5 p-4">
     <div class="container">
-      
       <div class="row no-gutters m-n3">
 
         <div class="col-md p-3">
           <h5 class="text-primary">About</h5>
           <div class="pl-3">
-            <p>After Eclipse took out DeviantArt, I made Charadex to help other species creators organize and keep easier track of their masterlist.</p>
-        
-            <p>And it's not limited to species! If you just sell adopts or what to make a little organizer for your characters - this might help. I use it to keep track of role play AU's and my own designs too!</p>
-        
-            <p>© <i>2022 Cheeriko All Rights Reserved</i></p>
+            <p>This is just a little side project based off Charadex - 100% made for anyone who's just too lazy to host their own dex...or just want a quick visual look at their Google Sheet LOL</p>
+            <p>Apologies if it's a lil janky.</p>
           </div>
         </div>
   
@@ -236,13 +296,6 @@
   <-- Edit these to your liking
   <-------------------------------------------------------------------- -->
   <div style="display:none;">
-
-
-    <!-- URL Param Filter Buttons
-    ------------------------------------------------------------------- -->
-    <li class="col-lg col-sm-6 p-2" id="charadex-filter-buttons">
-      <a class="btn btn-primary d-block link title" href=""></a>
-    </li>
                 
 
     <!-- Gallery Items
@@ -282,7 +335,7 @@
 
 
           <!-- Image -->
-          <div class="col-md-6 p-3">
+          <div class="col-md-6 p-3 p-3">
             <div class="mx-auto w-100 text-center" oncontextmenu="return false">
               <img class="image img-fluid" src="">
             </div>
@@ -290,60 +343,8 @@
 
 
           <!-- Information List -->
-          <div class="col-md-6 p-3">
-            
-            <!-- Item -->
-            <div class="d-flex justify-content-between mb-2">
-              <b class="text-muted">Owner</b>
-              <span class="owner"></span>
-            </div>
-              
-            <!-- Item -->
-            <div class="d-flex justify-content-between mb-2">
-              <b class="text-muted">Artist</b>
-              <span class="artist"></span>
-            </div>
-              
-            <!-- Item -->
-            <div class="d-flex justify-content-between mb-2">
-              <b class="text-muted">Designer</b>
-              <span class="designer"></span>
-            </div>
-              
-            <hr>
-  
-            <!-- Item -->
-            <div class="d-flex justify-content-between mb-2">
-              <b class="text-muted">Worth</b>
-              <span>$<span class="worth"></span></span>
-            </div>
-              
-            <!-- Item -->
-            <div class="d-flex justify-content-between mb-2">
-              <b class="text-muted">Status</b>
-              <span class="status"></span>
-            </div>
-              
-            <hr>
-              
-            <!-- Item -->
-            <div class="d-flex justify-content-between mb-2">
-              <b class="text-muted">Design Type</b>
-              <span class="designtype"></span>
-            </div>
-              
-            <hr>
-              
-            <!-- Item -->
-            <div class="">
-              <b class="text-muted">Notes</b>
-              <div class="pl-3">
-                <span class="notes"></span>
-              </div>
-            </div>
+          <div class="col-md-6 p-3 p-3 HTML"></div>
 
-            <!-- Add more list items above this line-->
-          </div>
         </div>
       </div> 
     </li>
@@ -365,8 +366,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.0/list.min.js" crossorigin="anonymous"></script>
 
   <!-- Charadex Script -->
-  <script src="styles/charadex.js"></script>
-  <script>charadex(yourOptions);</script>
+  <script src="styles/quickdex.js"></script>
 
 
 </body>
