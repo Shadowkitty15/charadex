@@ -8,15 +8,7 @@ Please note I'm not an actual dev and have absolutely no formal training. I've j
 
 &nbsp;
 
----
-
-&nbsp;
-
 <p align="center">Do not download from this page - please download the latest version <a href="https://github.com/cheeriko/charadex/releases/latest">here</a>.</p>
-
-&nbsp;
-
----
 
 &nbsp;
 
