@@ -275,9 +275,9 @@ $(document).ready(function(){
       '--cd-faded-background-color': `#${cssArray.fadedbg}`,
       '--cd-body-text-color': `#${cssArray.fontcolor}`,
       '--cd-border-color': `#${cssArray.bordercolor}`,
-      '--cd-border-width': `${cssArray.borderwidth}`,
+      '--cd-border-width': `${cssArray.borderwidth}px`,
       '--cd-border-style': `${cssArray.borderstyle}`,
-      '--cd-border-radius': `${cssArray.borderradius}`
+      '--cd-border-radius': `${cssArray.borderradius}px`
     };
 
     for (const property in cssProperties) {
