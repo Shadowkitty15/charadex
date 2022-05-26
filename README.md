@@ -1,5 +1,3 @@
-&nbsp;
-
 # Charadex v.4.0
 
 After Eclipse took out DeviantArt, I made Charadex to help other species creators organize and keep easier track of their masterlist.
