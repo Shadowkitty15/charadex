@@ -16,62 +16,32 @@ And it's not limited to species! If you just sell adopts or what to make a littl
 
 Please note I'm not an actual dev and have absolutely no formal training. I've just been learning JS here and there and I feel like even jank code is better than no code LOL
 
- 
-## Important
-
-You only need `index.html` and the `styles` folder with `charadex.css` & `charadex.js`! You do not need any other files for this to work! Please do not yell at me about Neocities not accepting the `README.md` file or I will steal all of your left shoes and fill them with marinara sauce.
+&nbsp;
 
  
-## Changelog
+## Navigation
 
-**v.4.0 || My Third Eye Slightly Opened**
+**Set Ups**
 
-- Another semi-complete remake.
-- JS has been overhauled, and hopefully easier to read?
-- Downgraded to Bootstrap 4.5 since it is the closest to Toyhou.se's current version.
-- Added dropdown to sort by any column you specify. (Default: Design Type)
-- Added dropdown to search specific columns, (Such as only search owners or artists)
-- Added prev/next links on single entry page for better navigation
-- Can now log multiple species! Hooray!
-- Fixed issue where Google Sheets would not output JSON with a header.
-- Slightly more updated look for the site template.
+- [Download](https://github.com/cheeriko/charadex/releases/latest)
+- [Getting Started](https://github.com/cheeriko/charadex/wiki/Getting-Started)
+- [Sheet Set-Up](https://github.com/cheeriko/charadex/wiki/Sheet-Set-Up)
+- [Site Set-Up](https://github.com/cheeriko/charadex/wiki/Site-Set-Up)
 
----
+**Other Information**
 
-**v.3.6 || Hotfix**
+- [FAQ](https://github.com/cheeriko/charadex/wiki#faq)
+- [Credits](https://github.com/cheeriko/charadex/wiki#credits-for-framework)
+- [License](https://github.com/cheeriko/charadex/wiki#license)
+- [Change Log](https://github.com/cheeriko/charadex/wiki/Change-Log)
 
-- Sylueon patched the Google Sheet parser to parse the v4 API.
+**Resources**
 
----
+- [Live Example]()
+- [Quickdex]()
 
-**v.3.5 || Ultimate Edition**
+&nbsp;
 
-- Completely redid everything. Because I'm nuts.
-- Switched to list.js instead of pagination.js.
-- Added a nicer pagination and added the ability to search.
-- Simplified the google sheet, hopefully this helps keeps older/slower computers from dying.
-- HTML for the general masterlist and cards can now be edited in the HTML page, instead of in the JS.
-- Added the ability to add more info!! Like traits and junk.
-- Died.
-
----
-
-**v.2.0 || General Updates and QOL Fixes**
-
-- Consolidated the JS for the pages.
-- Added single cards you can link to and get the info.
-- Added loading page.
-- YOU DO NOT NEED TO UPDATE THE INDEX FILE! Just the JS and CSS.
-> All updates have been tested in major browsers, but I can't guarantee they'll work in lesser known browsers.
-
----
-
-**v.1.0 || Launch**
-
-- I didn't keep a changlog up to this point so this is where we will Begin.
-- Added changelog
-
- 
 ## Credits
 
 - [Google Sheets](https://docs.google.com/spreadsheets/u/0/)
@@ -80,6 +50,7 @@ You only need `index.html` and the `styles` folder with `charadex.css` & `charad
 - [List.js](https://listjs.com/)
 - [Google Fonts](https://fonts.google.com/)
 
+&nbsp;
  
 ## License Information
 
