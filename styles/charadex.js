@@ -101,6 +101,7 @@ const charadex = (options) => {
 
           $('#filter-buttons').show();
 
+          // Creates Param Object Array
           let urlParamArray = [];
           const uniqueArray = [...new Set(sheetArray.map(i => i[charadexInfo.urlFilterParam]))];
           uniqueArray.forEach((i) => {
@@ -109,9 +110,12 @@ const charadex = (options) => {
               link: url.href.split('&')[0].split('?')[0] + '?' + charadexInfo.urlFilterParam + '=' + i.toLowerCase(),
             });
           });
+
+          // Adds All Button
+          urlParamArray.unshift({ title: 'All', link: url.href.split('&')[0].split('?')[0]});
       
           // Sorts list
-          urlParamArray.sort((a, b) => {return a.title - b.title})
+          urlParamArray.sort((a, b) => {return a.title - b.title});
         
           // List.js options
           let buttonOptions = {
