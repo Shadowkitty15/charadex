@@ -30,5 +30,5 @@ Please note I'm not an actual dev and have absolutely no formal training. I've j
 
 **Resources**
 
-- [Live Example]()
-- [Quickdex]()
+- [Live Example](https://cheeriko.github.io/charadex/)
+- [Quickdex](https://cheeriko.github.io/charadex/quickdex/)
