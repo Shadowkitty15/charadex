@@ -1,4 +1,6 @@
-<p align="center">Do not download from this page - please download the latest version [here]().</p>
+&nbsp;
+
+<p align="center">Do not download from this page - please download the latest version [here](https://github.com/cheeriko/charadex/releases/latest).</p>
 
 &nbsp;
 
