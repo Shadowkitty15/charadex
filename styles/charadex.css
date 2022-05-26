@@ -220,10 +220,6 @@ body.dark {
   --cd-border-color:                     rgba(255,255,255,.12);
 }
 
-body.dark img {
-  filter: invert(1) saturate(0.5) brightness(1.25) contrast(.75);
-}
-
 
 /* ============================================================= */
 /* General Page Styles
