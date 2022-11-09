@@ -11,10 +11,10 @@
   <!-- ----------------------------------------------------------------- -->
 
   <!-- Website's icon in the browser -->
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href=""/>
 
   <!-- Title of your site -->
-  <title>Nyandroids</title>
+  <title>Nyandroids masterlist</title>
 
   <!-- Description of your site -->
   <meta name="description" content="An automated masterlist for your species!">
@@ -32,7 +32,6 @@
   <!-- Bootstrap Icons -->
   <!-- https://icons.getbootstrap.com/#icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-  <script src="https://kit.fontawesome.com/734cc6a413.js" crossorigin="anonymous"></script>
 
 
   <!-- ----------------------------------------------------------------- -->
@@ -65,11 +64,14 @@
 
       // Ascending  (1 2 3) || asc
       // Descending (3 2 1) || desc
-      itemOrder: "desc",
+      itemOrder: "asc",
+
+      // Columns the search looks through by default
+      searchParams: ['id', 'owner', 'artist', 'designer'],
 
       // Creates 1 URL parameter that will filter the list based on a
       // column of your choosing.
-      urlFilterParam: 'species',
+      urlFilterParam: 'Species',
 
     };
   </script>
@@ -77,41 +79,39 @@
   <!-- --------------------------------------------------------------------
   <-- Navbar 
   <-------------------------------------------------------------------- -->
-  <nav class="nav navbar navbar-expand-md py-4">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="#"><i class="fa-solid fa-box-heart fa-fw"></i> Charadex</a>
-    
+      <a class="navbar-brand" href="#"><i class="bi bi-box2-heart"></i> Nyandroids</a>
+
       <!-- Toggle -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#charadexnav">
-        <i class="fa-solid fa-bars"></i>
+        <i class="bi bi-list"></i>
       </button>
-    
+
       <!-- Links -->
       <div class="collapse navbar-collapse" id="charadexnav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://toyhou.se/~world/120275.nyandroids/page/71036.tos">TOS</a></li>
+
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown"><i class="fa-solid fa-circle-question d-md-inline d-none"></i><span class="d-md-none">Resources</span></a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/releases/latest">Download Latest</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+              Websites
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://toyhou.se/~world/120275.nyandroids">TH world</a>
+              <a class="dropdown-item" href="https://discord.gg/9AyZtt5frB">Discord</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki">Wiki</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki/Getting-Started">Getting Started</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki/Sheet-Set-Up">Sheet Set-Up</a>
-              <a class="dropdown-item" target="_blank" href="https://github.com/cheeriko/charadex/wiki/Site-Set-Up">Site Set-Up</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="https://github.com/cheeriko/charadex/tree/main/custom_style_library">Custom Style Library</a>
-              <a class="dropdown-item d-none" target="_blank" href="https://cheeriko.github.io/charadex/quickdex/">Quickdex</a>
+              <a class="dropdown-item" href="https://www.instagram.com/nyandroids_/?ighid=YmMyMTA2M2Y%3D">Instagram</a>
             </div>
           </li>
-          <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/cheeriko/charadex"><i class="fa-solid fa-rabbit-running fa-fw d-md-inline d-none"></i><span class="d-md-none">Quickdex</span></a></li>
-          <li class="nav-item"><a class="nav-link" target="_blank" href="https://github.com/cheeriko/charadex"><i class="fa-brands fa-github-alt fa-fw d-md-inline d-none"></i><span class="d-md-none">Github</span></a></li>
-          <li class="nav-item"><a class="nav-link" target="_blank" href="https://ko-fi.com/cheeriko"><i class="fa-solid fa-mug fa-fw d-md-inline d-none"></i><span class="d-md-none">Support</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)" id="toggle"><i class="fa-solid fa-moon-over-sun fa-fw d-md-inline d-none"></i><span class="d-md-none">Dark Mode</span></a></li>
+
         </ul>
       </div>
-    
+
     </div>
   </nav>
 
@@ -128,6 +128,16 @@
     <div class="card p-4 mb-4" style="display:none;" id="filter-buttons">
       <ul class="row no-gutters list list-unstyled m-n2"></ul>
     </div>
+
+    <!-- Custom Button Example
+    ------------------------------------------------------------------- -->
+    <!--
+    <div class="card p-4 mb-4" style="display:none;" id="filter-buttons">
+      <div class="row no-gutters">
+        <div class="col-4 p-1"><a href="?[searchParam]=[thing its searching for]" class="btn btn-primary d-block">[thing its searching for]</a></div>
+      </div>
+    </div>
+    -->
 
 
     <!-- Gallery Container
@@ -199,34 +209,9 @@
   <-- Footer
   <-- Please do not remove the credit
   <-------------------------------------------------------------------- -->
-  <div class="footer p-md-5 p-4">
-    <div class="container">
-      
-      <div class="row no-gutters m-n3">
-
-        <div class="col-md p-3">
-          <h5 class="text-primary">About</h5>
-          <div class="pl-3">
-            <p>After Eclipse took out DeviantArt, I made Charadex to help other species creators organize and keep easier track of their masterlist.</p>
-        
-            <p>And it's not limited to species! If you just sell adopts or what to make a little organizer for your characters - this might help. I use it to keep track of role play AU's and my own designs too!</p>
-        
-            <p>© <i>2022 Cheeriko All Rights Reserved</i></p>
-          </div>
-        </div>
-  
-        <div class="col-md-auto p-3">
-          <h5 class="text-primary">Find Me</h5>
-          <div class="pl-3">
-            <a target="_blank" href="https://toyhou.se/cheeriko"><i class="fas fa-home fa-fw"></i> Toyhou.se</a><br>
-            <a target="_blank" href="https://www.deviantart.com/cheeriko"><i class="fab fa-deviantart fa-fw"></i> Deviantart</a><br>
-            <a target="_blank" href="https://ko-fi.com/cheeriko"><i class="fas fa-coffee fa-fw"></i> Ko-Fi</a><br>
-            <a target="_blank" href="https://github.com/cheeriko"><i class="fab fa-github fa-fw"></i> Github</a><br>
-          </div>
-        </div>
-  
-      </div>
-    </div>
+  <div class="footer bg-dark p-md-5 p-4 text-center">
+    <p><a class="text-reset" href="https://toyhou.se/ShadowKitty15">[Nyandroids] © [shadowkitty15]</a></p>
+    <p><a href="https://github.com/cheeriko/charadex">Powered by Charadex</a></p>
   </div>
 
 
@@ -366,7 +351,6 @@
 
   <!-- Charadex Script -->
   <script src="styles/charadex.js"></script>
-  <script>charadex(yourOptions);</script>
 
 
 </body>
